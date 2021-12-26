@@ -25,11 +25,18 @@ SECRET_KEY = '1-jun7c#88dr(l4myqqlgl-q!c0pp^#ef=v-@d2!(6cgaqva_0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '87.107.146.208', '172.16.207.1' ,'127.0.0.1', '0.0.0.0' , '172.16.207.35' ,'192.168.1.106' ,'192.168.43.24' ,'192.168.43.24' , '192.168.43.211', '172.16.207.58','192.168.1.51'
-]
+#ALLOWED_HOSTS = [
+ #   '87.107.146.208', '172.16.207.1' ,'127.0.0.1', '0.0.0.0' , '172.16.207.35' ,'192.168.1.106' ,'192.168.43.24' ,'192.168.43.24' , '192.168.43.211', '172.16.207.58','192.168.1.51'
+#]
+ALLOWED_HOSTS = ['*']
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+#CORS_ALLOW_ALL_ORIGINS = True
 
+#CORS_ALLOWED_ORIGINS = [
+#    'http://87.107.146.208', '87.107.146.208'
+#]
 
 # Application definition
 
@@ -38,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'corsheaders',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -47,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
