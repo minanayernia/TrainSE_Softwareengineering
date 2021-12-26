@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="aa8ffee0-dd5c-41cc-a467-e688110db8d2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0002_auto_20211018_2052.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0003_auto_20211129_2246.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0004_auto_20211129_2249.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0005_auto_20211130_1242.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0005_auto_20211130_1634.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0006_auto_20211130_1657.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0007_auto_20211130_1707.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0008_auto_20211130_1906.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0009_auto_20211130_1945.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0010_auto_20211130_1947.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0011_auto_20211201_1214.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0011_merge_0005_auto_20211130_1242_0010_auto_20211130_1947.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0012_auto_20211201_1217.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0012_auto_20211201_1711.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0013_auto_20211201_1223.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0014_auto_20211201_1228.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0015_auto_20211201_1242.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0016_auto_20211201_1333.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0017_merge_0012_auto_20211201_1711_0016_auto_20211201_1333.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0018_auto_20211202_1909.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/0019_auto_20211202_1935.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/firstApp/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/firstApp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firstApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/firstApp/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\mina-nyr\Desktop\New folder (2)\trainse_softwareengineeringproject\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="20M3sFqgh7EUKhB1YqSYpSLF2w5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="trainse_softwareengineeringproject" type="Python.DjangoServer" factoryName="Django server">
+      <module name="trainse_softwareengineeringproject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aa8ffee0-dd5c-41cc-a467-e688110db8d2" name="Default Changelist" comment="" />
+      <created>1635840833330</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635840833330</updated>
+      <workItem from="1635840835063" duration="281000" />
+      <workItem from="1635841135039" duration="19000" />
+      <workItem from="1635841155410" duration="5265000" />
+      <workItem from="1638609421542" duration="3948000" />
+      <workItem from="1638685914298" duration="32000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="361" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1638609453431">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1638609453431" />
+    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1638612845426">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1638612845426" />
+    <state width="189" height="457" key="HiddenNamespacesPopup" timestamp="1638612873910">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="189" height="457" key="HiddenNamespacesPopup/0.0.1536.824@0.0.1536.824" timestamp="1638612873910" />
+  </component>
+</project>
