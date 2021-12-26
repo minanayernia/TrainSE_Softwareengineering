@@ -5,6 +5,7 @@
         <h1>{{data.title}}</h1>
         <div class="top-right-button-container">
           <b-dropdown
+            v-if="currentUser!=null"
             id="ddown5"
             :text="$t('pages.actions')"
             size="lg"
@@ -25,7 +26,7 @@
               <b-colxx xxs="12" lg="4" class="mb-4">
                 <b-card class="mb-4" no-body>
                  
-                  <img :src="data.image" alt="Detail" class="card-img-top" />
+                  <img src="https://i.pcmag.com/imagery/articles/0270lteaknt7h4pBahOR4az-40..v1580751227.jpg" alt="Detail" class="card-img-top" />
                   <b-button :href="data.link" variant="primary" style="border-radius: 0px 0px 10px 10px;">Visit tutorial</b-button>
                   <b-card-body>
                     <p class="text-muted text-small mb-2">{{ $t('pages.description') }}</p>
@@ -66,11 +67,8 @@
                 
               </b-colxx>
               <b-colxx xxs="12" lg="8">
-                <b-card class="mb-4" :title="'Rating'">
-                  <p class="text-muted text-small mb-2">{{ $t('pages.rating') }}</p>
-                    <div class="mb-3">
-                      <stars value="4" :disabled="true"></stars>
-                    </div>
+                <b-card class="mb-4" >
+
                   <b-row>
                     <b-colxx lg="6">
                     <radial-progress-card
@@ -82,13 +80,29 @@
                     </b-colxx>
                     <b-colxx lg="6">
                     <radial-progress-card
-                      :title="$t('Content Coverage')"
+                      :title="$t('Content Quality')"
                       :percent="85"
                       no-suffle
                       class="mb-4"
                     />
                     </b-colxx>
-                   
+                    <b-colxx lg="6">
+                    <radial-progress-card
+                      :title="$t('Course Depth And Covergae')"
+                      :percent="85"
+                      no-suffle
+                      class="mb-4"
+                    />
+                    </b-colxx>
+                    <b-colxx lg="6">
+                    <radial-progress-card
+                      :title="$t('Course Pace')"
+                      :percent="85"
+                      no-suffle
+                      class="mb-4"
+                    />
+                    </b-colxx>
+
                   </b-row>
                 </b-card>
                 <b-card class="mb-4" :title="$t('pages.comments')">

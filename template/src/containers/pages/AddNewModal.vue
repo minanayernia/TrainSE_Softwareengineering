@@ -52,25 +52,6 @@
             </div>
           </tab>
 
-          <tab name="Image" >
-            <div class="wizard-basic-step">
-              <b-form>
-                <b-row>
-                  <b-colxx xxs="12">
-                    <vue-dropzone
-                      ref="mainImageUpload"
-                      id="mainImageDropzone"
-                      :options="mainImageDropzoneOptions"
-                      class="mb-3"
-                      @vdropzone-success="mainImageUploadSuccess"
-                      @vdropzone-removed-file="mainImageDeleteFile"
-                    ></vue-dropzone>
-                  </b-colxx>
-                </b-row>
-              </b-form>
-            </div>
-          </tab>
-
           <tab type="done">
             <div class="wizard-basic-step text-center">
               <h2 class="mb-2">Are you sure you want to submit this resource?</h2>

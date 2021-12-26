@@ -4,6 +4,7 @@
       <h1>{{ title }}</h1>
       <div class="top-right-button-container">
         <b-button
+          v-if="currentUser!=null"
           v-b-modal.modalright
           variant="primary"
           size="lg"
@@ -22,26 +23,7 @@
           <i class="simple-icon-arrow-down align-middle" />
         </b-button>
         <b-collapse id="displayOptions" class="d-md-block">
-          <span class="mr-3 d-inline-block float-md-left">
-            <a
-              :class="{'mr-2 view-icon':true,'active': displayMode==='list'}"
-              @click="changeDisplayMode('list')"
-            >
-              <data-list-icon />
-            </a>
-            <a
-              :class="{'mr-2 view-icon':true,'active': displayMode==='thumb'}"
-              @click="changeDisplayMode('thumb')"
-            >
-              <thumb-list-icon />
-            </a>
-            <a
-              :class="{'mr-2 view-icon':true,'active': displayMode==='image'}"
-              @click="changeDisplayMode('image')"
-            >
-              <image-list-icon />
-            </a>
-          </span>
+
           <div class="d-block d-md-inline-block pt-1">
             <b-dropdown
               id="ddown1"
@@ -61,23 +43,7 @@
               <b-input :placeholder="$t('menu.search')"  @input="(val) => searchChange(val)" />
             </div>
           </div>
-          <div class="float-md-right pt-1">
-            <span class="text-muted text-small mr-1 mb-2">{{from}}-{{to}} of {{ total }}</span>
-            <b-dropdown
-              id="ddown2"
-              right
-              :text="`${perPage}`"
-              variant="outline-dark"
-              class="d-inline-block"
-              size="xs"
-            >
-              <b-dropdown-item
-                v-for="(size,index) in pageSizes"
-                :key="index"
-                @click="changePageSize(size)"
-              >{{ size }}</b-dropdown-item>
-            </b-dropdown>
-          </div>
+
         </b-collapse>
       </div>
       <div class="separator mb-5" />
@@ -116,6 +82,7 @@ export default {
     "total",
     "perPage",
     "categoryID",
+    "currentUser"
   ],
   data() {
     return {

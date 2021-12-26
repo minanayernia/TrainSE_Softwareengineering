@@ -3,7 +3,7 @@
     <b-card  no-body>
             <router-link :to="`/app/pages/product/details-alt/${data.resource_id}`" >
 
-            <img :src="data.image" class="card-img-top" :alt="data.title"  width="253" height="202" />
+            <img src="https://i.pcmag.com/imagery/articles/0270lteaknt7h4pBahOR4az-40..v1580751227.jpg" class="card-img-top" :alt="data.title"  width="253" height="202" />
 
             </router-link> 
 
@@ -24,12 +24,10 @@
             <b-row>
                 <b-colxx xxs="10" class="mb-3">
                     <h6 class="mb-4 card-subtitle">{{data.title}}</h6>
-                    <stars value="4" disabled=true />
                 </b-colxx>
                 <div class="mb-3">
                         <p class="d-sm-inline-block mb-1">
-                        <b-badge pill variant="outline-secondary" class="mb-1 mr-1">Free</b-badge>
-                        <b-badge pill variant="outline-secondary" class="mb-1 mr-1">Beginner</b-badge>
+                        <b-badge v-for="(tag,index) in data.tags" :key="index" pill variant="outline-secondary" class="mb-1 mr-1">{{tag.title}}</b-badge>
                         </p>
                     </div>
             </b-row>

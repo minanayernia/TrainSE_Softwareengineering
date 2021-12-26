@@ -17,6 +17,7 @@
           :loadItems="loadItems"
           @toggle-item="toggleItem"
           v-contextmenu:contextmenu
+          :currentUser="currentUser"
         />
       </b-colxx>
     </b-row>
@@ -106,6 +107,7 @@ export default {
     "changePage",
     "handleContextMenu",
     "onContextMenuAction",
+    "currentUser",
   ],
   methods: {
     linkGen(pageNum) {

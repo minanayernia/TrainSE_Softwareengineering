@@ -23,6 +23,7 @@
         :perPage="perPage"
         :categoryID="categoryID"
         :loadItems="loadItems"
+        :currentUser="currentUser"
       ></list-page-heading>
       <template v-if="isLoad">
         <list-page-listing
@@ -37,6 +38,7 @@
           :handleContextMenu="handleContextMenu"
           :loadItems="loadItems"
           :onContextMenuAction="onContextMenuAction"
+          :currentUser="currentUser"
         ></list-page-listing>
       </template>
       <template v-else>

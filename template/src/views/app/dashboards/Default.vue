@@ -18,7 +18,7 @@
             <b-card  class="mb-4 text-center">
               <router-link :to="`/app/pages/product/image-list/${category.category_id}`" >
                 <img
-                  :src="category.image"
+                  src="https://www.iceye.com/hubfs/Blog/Software_Engineering.jpg"
                   alt="Card image cap"
                   class="img-thumbnail list-thumbnail rounded-circle border-0 mb-4"
                 />
