@@ -1155,3 +1155,50 @@ class DeleteBookmark(CreateAPIView):
         person.bookmarked.remove(resource)
         person.save()
         return Response(status= status.HTTP_200_OK)
+
+class ReportingComment(CreateAPIView):
+    allowed_methods = ['Post']
+    def post(self, request, *args, **kwargs):
+        personId = request.data.get('person_id')
+        person = models.Person.objects.get(pk = personId)
+        commentId = request.data.get('comment_id')
+        print("catch comment")
+        print(commentId)
+        comment = models.Commentt.objects.get(pk = commentId)
+        print ('hey comment')
+        print (comment)
+        report_record = models.ReportComment.objects.filter(person = person , comment = comment)
+        if report_record.exists() :
+            return Response({"msg":"Reported" , "status" : 500 })
+            
+        else:
+            report = models.ReportComment(person = person , comment = comment)
+            report.save()
+            #check the number of reports of a comment if it is more than 10 the comment should be deleted
+            count_report = models.ReportComment.objects.filter(comment = comment).count()
+            if (count_report > 10 ):
+                comment.delete()
+                print("comment deleted")
+            return Response(status= status.HTTP_200_OK)
+
+class ReportingResource(CreateAPIView):
+    allowed_methods = ['Post']
+    def post(self, request, *args, **kwargs):
+        personId = request.data.get('person_id')
+        person = models.Person.objects.get(pk = personId)
+        resourceId = request.data.get('resource_id')
+        resource = models.Resource.objects.get(pk = resourceId)
+        report_record = models.ReportResource.objects.filter(person = person , resource = resource)
+
+        if report_record.exists() :
+            return Response({"msg":"Reported" , "status" : 500 })
+            
+        else:
+            report = models.ReportResource(person = person , resource = resource)
+            report.save()
+            #check the number of reports of a resource if it is more than 10 the resource should be deleted
+            count_report = models.ReportResource.objects.filter(resource = resource).count()
+            if (count_report > 10 ):
+                resource.delete()
+                print("resource deleted")
+            return Response(status= status.HTTP_200_OK)
