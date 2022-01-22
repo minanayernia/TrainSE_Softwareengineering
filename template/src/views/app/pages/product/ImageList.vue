@@ -68,7 +68,7 @@ export default {
   },
   data() {
     return {
-      title:this.$route.params.name,
+      title:"",
       resourceList:[],
       isLoad: false,
       apiBase: apiUrl + "/cakes/fordatatable",
@@ -149,7 +149,6 @@ export default {
     loadItems() {
       console.log("load items");
       console.log(this.$route.params)
-      this.title=this.$route.params.name;
       console.log(this.$route.params.id)
       const data={
           categoryId:this.$route.params.id,
@@ -173,6 +172,19 @@ export default {
             this.isLoad=true;
             console.log(res);
         });
+      const data1={
+        category_id:this.$route.params.id.toString(),
+      }
+      axios
+        .post(api+"getCategoryByID/",data1)
+        .then(response => {
+          console.log("resource list");
+          console.log(response);
+          return response.data;
+        })
+        .then(res => {
+            this.title=res.name;
+        });          
     },
 
     searchResource(val){
