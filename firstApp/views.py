@@ -1202,3 +1202,22 @@ class ReportingResource(CreateAPIView):
                 resource.delete()
                 print("resource deleted")
             return Response(status= status.HTTP_200_OK)
+
+class GetCategoryByID(CreateAPIView):
+    allowed_methods = ['Post']
+    def post(self, request, *args, **kwargs):
+        categoryId = request.data.get('category_id')
+        category = models.Category.objects.get(pk = categoryId)
+        subcategorylist = models.Subcategory.objects.filter(category = category)
+        print("this is subcategory list")
+        print(subcategorylist)
+        dic = {}
+        subcatList = []
+        dic['name'] = category.title
+        for subcat in subcategorylist :
+            dic_sub = {}
+            dic_sub['title'] = subcat.title
+            dic_sub['id'] = subcat.id
+            subcatList.append(dic_sub)
+        dic['subcategories'] = subcatList
+        return Response(dic , status=status.HTTP_200_OK)
