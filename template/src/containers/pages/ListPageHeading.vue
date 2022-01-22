@@ -113,15 +113,15 @@ export default {
       ],
       sortOptions: [
         {
-          column: "title",
+          column: "Oldest",
           label: "Oldest"
         },
         {
-          column: "category",
+          column: "Newest",
           label: "Newest"
         },
         {
-          column: "status",
+          column: "Rating",
           label: "Rating"
         }
       ],

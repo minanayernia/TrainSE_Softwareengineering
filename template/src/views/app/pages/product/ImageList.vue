@@ -74,7 +74,7 @@ export default {
       apiBase: apiUrl + "/cakes/fordatatable",
       displayMode: "image",
       sort: {
-        column: "title",
+        column: "Rating",
         label: "Rating"
       },
       page: 1,
@@ -154,14 +154,22 @@ export default {
           categoryId:this.$route.params.id,
           personId:null,
       };
-
+      var urll="";
       if(this.currentUser != null){
 
         data.personId=this.currentUser.id;
       }
-      
+      if(this.sort.label=="Rating"){
+        urll="orderbyLikeResourceList/";
+      }
+      if(this.sort.label=="Oldest"){
+        urll="resourceList/";
+      }
+      if(this.sort.label=="Newest"){
+        urll="newstResourceList/";
+      }
       axios
-        .post(api+"resourceList/",data)
+        .post(api+urll,data)
         .then(response => {
           console.log("resource list");
           console.log(response);
