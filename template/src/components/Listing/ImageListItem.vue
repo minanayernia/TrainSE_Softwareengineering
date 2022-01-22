@@ -4,7 +4,7 @@
         <router-link :to="`/app/pages/product/details-alt/${data.resource_id}`" >
 
         <img src="https://i.pcmag.com/imagery/articles/0270lteaknt7h4pBahOR4az-40..v1580751227.jpg" class="card-img-top" :alt="data.title"  width="253" height="202" />
-
+        <b-badge pill variant="primary" class="position-absolute badge-top-left"><i class="fa fa-thumbs-up fa-2x"> 5</i></b-badge>
         </router-link> 
 
         <a class="btn btn-primary" :href="data.link" style="border-radius: 0px 0px 10px 10px;">Visit tutorial</a>
@@ -21,7 +21,7 @@
           </router-link>
             <b-row v-if="isHovered">
               <b-colxx  lg="6">
-                <b-button  v-if="data.isbookmark == 0" variant="primary" class="btn  btn-block  default text-center rounded"  @click="like()"
+                <b-button  v-if="data.isliked == 0" variant="primary" class="btn  btn-block  default text-center rounded"  @click="like()"
                   ><i class="fa fa-thumbs-up fa-lg"></i></b-button>
                 <b-button  v-else variant="outline-primary" class="btn  btn-block  default text-center rounded"  @click="unlike()"
                   ><i class="fa fa-thumbs-up fa-lg"></i></b-button>
