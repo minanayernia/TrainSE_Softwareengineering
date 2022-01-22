@@ -26,7 +26,6 @@
           </b-dropdown>
         </div>
         <b-tabs nav-class="separator-tabs ml-0 mb-5" content-class="tab-content" :no-fade="true">
-          <b-tab :title="$t('pages.details')">
             <b-row>
               <b-colxx xxs="12" lg="4" class="mb-4">
                 <b-card class="mb-4" no-body>
@@ -69,44 +68,8 @@
                 
               </b-colxx>
               <b-colxx xxs="12" lg="8">
-                <b-card class="mb-4" >
-
-                  <b-row>
-                    <b-colxx lg="6">
-                    <radial-progress-card
-                      :title="$t('Video Quality')"
-                      :percent="85"
-                      no-suffle
-                      class="mb-4"
-                    />
-                    </b-colxx>
-                    <b-colxx lg="6">
-                    <radial-progress-card
-                      :title="$t('Content Quality')"
-                      :percent="85"
-                      no-suffle
-                      class="mb-4"
-                    />
-                    </b-colxx>
-                    <b-colxx lg="6">
-                    <radial-progress-card
-                      :title="$t('Course Depth And Covergae')"
-                      :percent="85"
-                      no-suffle
-                      class="mb-4"
-                    />
-                    </b-colxx>
-                    <b-colxx lg="6">
-                    <radial-progress-card
-                      :title="$t('Course Pace')"
-                      :percent="85"
-                      no-suffle
-                      class="mb-4"
-                    />
-                    </b-colxx>
-
-                  </b-row>
-                </b-card>
+              <icon-cards-carousel :data="data" :VideoQuality="VideoQuality" :ContentQuality="ContentQuality" :CourseDepth="CourseDepth" :CoursePace="CoursePace" :QualifiedInstructor="QualifiedInstructor"></icon-cards-carousel>
+                  
                 <b-card class="mb-4" :title="$t('pages.comments')">
                   <comment-item
                     v-for="(comment,index) in data.comment"
@@ -144,11 +107,14 @@ import OrderItem from "../../../../components/Listing/OrderItem";
 import { comments } from "../../../../data/comments";
 import orders from "../../../../data/orders";
 import SmallLineCharts from "../../../../containers/dashboards/SmallLineCharts";
-import WebsiteVisitsChartCard from "../../../../containers/dashboards/WebsiteVisitsChartCard";
 import { apiUrl ,api } from "../../../../constants/config";
 import axios from "axios";
 import EditResource from "../../../../containers/pages/EditResource";
 import { mapGetters, mapMutations, mapActions } from "vuex";
+
+import GradientWithRadialProgressCard from "../../../../components/Cards/GradientWithRadialProgressCard";
+import IconCard from "../../../../components/Cards/IconCard";
+import IconCardsCarousel from "../../../../containers/dashboards/IconCardsCarousel";
 
 export default {
   components: {
@@ -157,8 +123,11 @@ export default {
     "comment-item": CommentItem,
     "order-item": OrderItem,
     "small-line-charts": SmallLineCharts,
-    "website-visit-chart-card": WebsiteVisitsChartCard,
     "edit-resource": EditResource,
+    "gradient-with-radial-progress-card": GradientWithRadialProgressCard,
+    "icon-card": IconCard,
+    "icon-cards-carousel": IconCardsCarousel,
+
   },
   data() {
     return {
@@ -179,6 +148,86 @@ export default {
     })
   },
   methods: {
+    VideoQuality(){
+        console.log("khoboibgoigboug")
+        const data = {
+        pers:this.currentUser.id.toString(),
+        resc:this.$route.params.id.toString(),
+      };
+      axios
+        .post(api+"VideoQuality/",data)
+        .then(response => {
+          return response.data;
+        })
+        .then(res => {
+            this.loadResources();
+            console.log(res);
+        });
+    },
+    ContentQuality(){
+        console.log("khoboibgoigboug")
+        const data = {
+        pers:this.currentUser.id.toString(),
+        resc:this.$route.params.id.toString(),
+      };
+      axios
+        .post(api+"ContentQuality/",data)
+        .then(response => {
+          return response.data;
+        })
+        .then(res => {
+            this.loadResources();
+            console.log(res);
+        });
+    },
+    CourseDepth(){
+        console.log("khoboibgoigboug")
+        const data = {
+        pers:this.currentUser.id.toString(),
+        resc:this.$route.params.id.toString(),
+      };
+      axios
+        .post(api+"CourseDepth/",data)
+        .then(response => {
+          return response.data;
+        })
+        .then(res => {
+            this.loadResources();
+            console.log(res);
+        });
+    },
+    CoursePace(){
+        console.log("khoboibgoigboug")
+        const data = {
+        pers:this.currentUser.id.toString(),
+        resc:this.$route.params.id.toString(),
+      };
+      axios
+        .post(api+"CoursePace/",data)
+        .then(response => {
+          return response.data;
+        })
+        .then(res => {
+            this.loadResources();
+            console.log(res);
+        });
+    },
+    QualifiedInstructor(){
+        console.log("khoboibgoigboug")
+        const data = {
+        pers:this.currentUser.id.toString(),
+        resc:this.$route.params.id.toString(),
+      };
+      axios
+        .post(api+"QualifiedInstructor/",data)
+        .then(response => {
+          return response.data;
+        })
+        .then(res => {
+            this.loadResources();
+            console.log(res);
+        });
+    },
     report(id){
       console.log("report")
       console.log(this.currentUser)
@@ -224,7 +273,6 @@ export default {
       axios
         .post(api+"createcomment/",comment)
         .then(response => {
-
           return response.data;
         })
         .then(res => {
@@ -234,8 +282,20 @@ export default {
         });
     },
     replyComment(id){
-      this.repleyID=id;
-      console.log(id)
+
+      const data = {
+        person_id:this.currentUser.id,
+        comment_id:id,
+      };
+      axios
+        .post(api+"reportComment/",data)
+        .then(response => {
+
+          return response.data;
+        })
+        .then(res => {
+
+        });
     },
     loadResources(){
       console.log("Loading single resouce");

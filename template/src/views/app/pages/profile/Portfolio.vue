@@ -15,7 +15,7 @@
                     <single-lightbox thumb="/assets/img/profiles/1.jpg" large="/assets/img/profiles/1.jpg" class-name="card-img-top" />
                     
                     <b-card-body>
-                        <p class="text-muted text-small mb-2">{{$t('UserName')}}</p>
+                        <p class="text-muted text-small mb-2">{{$t('User Name')}}</p>
                         <p class="mb-3">
                             {{data.username}}
                         </p>
@@ -26,20 +26,9 @@
                         <p class="text-muted text-small mb-2">{{$t('pages.location')}}</p>
                         <p class="mb-3">{{data.location}}</p>
                                         
-                        <p class="text-muted text-small mb-2">{{$t('menu.contact')}}</p>
-                        <div class="social-icons">
-                            <ul class="list-unstyled list-inline">
-                                <li class="list-inline-item">
-                                    <router-link to="#"><i class="simple-icon-social-facebook"></i></router-link>
-                                </li>
-                                <li class="list-inline-item">
-                                    <router-link to="#"><i class="simple-icon-social-twitter"></i></router-link>
-                                </li>
-                                <li class="list-inline-item">
-                                    <router-link to="#"><i class="simple-icon-social-instagram"></i></router-link>
-                                </li>
-                            </ul>
-                        </div>
+                        <p class="text-muted text-small mb-2">Email Address</p>
+                        <p class="mb-3">{{data.email}}</p>
+
                         <b-row>                   
                     <div class="top-right-button-container">
                     <b-button

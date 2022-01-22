@@ -1,26 +1,36 @@
 <template>
-  <div class="icon-cards-row">
+  <div class="icon-cards-row" >
     <glide-component :settings="glideIconsOption">
-      <icon-card :title="$t('dashboards.pending-orders')" icon="iconsminds-clock" :value="14" />
+      <icon-card @update="VideoQuality" :title="$t('Video Quality')" icon="iconsminds-like" :value="data.videoqualityCount" />
+      <icon-card @update="ContentQuality" :title="$t('Content Quality')" icon="iconsminds-like" :value="data.contenqualitycount" />
       <icon-card
-        :title="$t('dashboards.completed-orders')"
-        icon="iconsminds-basket-coins"
-        :value="32"
+        @update="CourseDepth" 
+        :title="$t('Course Covergae')"
+        icon="iconsminds-like"
+        :value="data.coursedepthCount"
       />
       <icon-card
-        :title="$t('dashboards.refund-requests')"
-        icon="iconsminds-arrow-refresh"
-        :value="74"
+        @update="CoursePace" 
+        :title="$t('Course Pace')"
+        icon="iconsminds-like"
+        :value="data.courpacethCount"
       />
-      <icon-card :title="$t('dashboards.new-comments')" icon="iconsminds-mail-read" :value="25" />
+      <icon-card
+        @update="QualifiedInstructor" 
+        :title="$t('Qualified Instructor')"
+        icon="iconsminds-like"
+        :value="data.qualifiedinstructorCount"
+      />
     </glide-component>
   </div>
 </template>
+
 <script>
 import GlideComponent from "../../components/Carousel/GlideComponent";
 import IconCard from "../../components/Cards/IconCard";
 
 export default {
+  props: ['data','VideoQuality','ContentQuality','CourseDepth','CoursePace','QualifiedInstructor'],
   components: {
     "glide-component": GlideComponent,
     "icon-card": IconCard
@@ -29,22 +39,8 @@ export default {
     return {
       glideIconsOption: {
         gap: 5,
-        perView: 4,
+        perView: 5,
         type: "carousel",
-        breakpoints: {
-          320: {
-            perView: 1
-          },
-          576: {
-            perView: 2
-          },
-          1600: {
-            perView: 3
-          },
-          1800: {
-            perView: 4
-          }
-        },
         hideNav: true
       }
     };
