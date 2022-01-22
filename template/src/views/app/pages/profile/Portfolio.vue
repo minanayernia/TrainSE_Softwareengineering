@@ -67,6 +67,7 @@
                                 :data="item"
                                 :selected-items="selectedItems"
                                 @toggle-item="toggleItem"
+                                :loadItems="loadProfile"
                                 />
                         </b-colxx>
                     
@@ -81,6 +82,7 @@
                                 :data="item"
                                 :selected-items="selectedItems"
                                 @toggle-item="toggleItem"
+                                @loadItems="loadProfile"
                                 />
                         </b-colxx>
                     
@@ -94,6 +96,7 @@
                                 :data="item"
                                 :selected-items="selectedItems"
                                 @toggle-item="toggleItem"
+                                :loadItems="loadProfile"
                                 />
                         </b-colxx>
                     
@@ -153,48 +156,52 @@ export default {
             this.$emit('toggle-item', event, itemId)
         },
         loadProfile(){
-      console.log("Loading Profile");
-      console.log(this.$route.params.id);
-      const user = {
-        id:this.currentUser.id,
-      };
-      axios
-        .post(api+"showProfile/",user)
-        .then(response => {
-          console.log("user");
-          console.log(response);
-          return response.data;
-        })
-        .then(res => {
-            this.data=res;
-            console.log(res);
-        });
-    },
+            console.log("Loading Profile");
+            console.log(this.$route.params.id);
+
+            this.loadBookMarks();
+            this.loadSubmitted();
+            this.loadLiked();
+            const user = {
+                id:this.currentUser.id,
+            };
+            axios
+                .post(api+"showProfile/",user)
+                .then(response => {
+                console.log("user");
+                console.log(response);
+                return response.data;
+                })
+                .then(res => {
+                    this.data=res;
+                    console.log(res);
+                });
+        },
         loadBookMarks(){
             console.log("Loading bookmark");
             
         const bookmark = {
-        id:this.currentUser.id,
-      };
-      axios
-        .post(api+"BookmarkedList/",bookmark)
-        .then(response => {
-          console.log("bookmark");
-          console.log(response);
-          return response.data;
-        })
-        .then(res => {
-            this.bookmarkedList=res;
-            console.log(res);
-        });
+            id:this.currentUser.id,
+            };
+            axios
+                .post(api+"BookmarkedList/",bookmark)
+                .then(response => {
+                console.log("bookmark");
+                console.log(response);
+                return response.data;
+                })
+                .then(res => {
+                    this.bookmarkedList=res;
+                    console.log(res);
+                });
         },
         loadSubmitted(){
             console.log("Loading submitted");
             
         const submit = {
         id:this.currentUser.id,
-      };
-      axios
+        };
+        axios
         .post(api+"submittedResourceList/",submit)
         .then(response => {
           console.log("bookmark");

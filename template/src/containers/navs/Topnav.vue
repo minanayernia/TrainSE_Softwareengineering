@@ -18,24 +18,6 @@
         </span>
       </div>
 
-      <div class="d-inline-block">
-        <b-dropdown
-          id="langddm"
-          class="ml-2"
-          variant="light"
-          size="sm"
-          toggle-class="language-button"
-        >
-          <template slot="button-content">
-            <span class="name">{{$i18n.locale.toUpperCase()}}</span>
-          </template>
-          <b-dropdown-item
-            v-for="(l,index) in localeOptions"
-            :key="index"
-            @click="changeLocale(l.id, l.direction)"
-          >{{l.name}}</b-dropdown-item>
-        </b-dropdown>
-      </div>
       
 
     </div>
