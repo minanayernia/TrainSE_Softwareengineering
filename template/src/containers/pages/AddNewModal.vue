@@ -36,17 +36,17 @@
           >
             <div class="wizard-basic-step">
 
-              <div v-for="(filterItem,index) in filters" >
+              <div v-for="(filterItem,index) in filters" :key="index">
                 <label >{{filterItem.title}}</label>
                 <b-form-checkbox-group v-model="selectedFilters" stacked class="list-unstyled mb-4">
-                  <b-form-checkbox  v-for="(tag, index) in filterItem.tags"  :name="filterItem.title" :value="tag.id">{{tag.title}}</b-form-checkbox>
+                  <b-form-checkbox  v-for="(tag, index) in filterItem.tags"  :key="index" :name="filterItem.title" :value="tag.id">{{tag.title}}</b-form-checkbox>
                 </b-form-checkbox-group>   
               </div>
 
-              <div v-for="(filterItem,index) in subCategories" >
+              <div v-for="(filterItem,index) in subCategories" :key="index">
                 <label >{{filterItem.title}}</label>
                 <b-form-checkbox-group v-model="selectedsubCategories" stacked class="list-unstyled mb-4">
-                  <b-form-checkbox  v-for="(tag, index) in filterItem.tags"  :name="filterItem.title" :value="tag.id">{{tag.title}}</b-form-checkbox>
+                  <b-form-checkbox  v-for="(tag, index) in filterItem.tags" :key="index" :name="filterItem.title" :value="tag.id">{{tag.title}}</b-form-checkbox>
                 </b-form-checkbox-group>   
               </div>
             </div>
