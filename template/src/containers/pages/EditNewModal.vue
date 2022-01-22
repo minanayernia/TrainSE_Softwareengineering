@@ -3,7 +3,7 @@
   <b-modal
     id="modalright"
     ref="modalright"
-    title="Add New Resource"
+    title="Edit Profile"
     size="md"
     hide-footer
   >
