@@ -16,8 +16,8 @@
         </router-link>
     </div>
     <div class="navbar-right">
-        <button @click="replyComment(data.comment_id)" style="position: absolute;right: 10px;top: 5px;" class="btn btn-info" ><i class="iconsminds-to-left"></i></button>
-        <button @click="likeComment(data.comment_id)" style="position: absolute;right: 80px;top: 5px;" class="btn btn-info" ><i class="iconsminds-like"></i></button>
+        <button @click="replyComment(data.comment_id)" style="position: absolute;right: 0px;top: 5px;" class="btn btn-info" >report</button>
+        <button @click="likeComment(data.comment_id)" style="position: absolute;right: 80px;top: 5px;" class="btn btn-info" >like</button>
     </div>
 </div>
     

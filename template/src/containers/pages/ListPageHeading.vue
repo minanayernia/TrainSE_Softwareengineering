@@ -12,7 +12,7 @@
         >{{ $t('pages.add-new') }}</b-button>
 
       </div>
-      <add-new-modal :categoryID="categoryID" ></add-new-modal>
+      <add-new-modal :categoryID="categoryID" @update="loadItems"></add-new-modal>
       <div class="mb-2 mt-2">
         <b-button
           variant="empty"
@@ -82,7 +82,8 @@ export default {
     "total",
     "perPage",
     "categoryID",
-    "currentUser"
+    "currentUser",
+    "loadItems",
   ],
   data() {
     return {
