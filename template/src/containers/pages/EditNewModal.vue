@@ -8,49 +8,32 @@
     hide-footer
   >
     <b-card no-body>
-      <b-card-body class="wizard wizard-default">
-        <form-wizard :last-step-end="true">
-          <tab
-            name="Properties"
-            :selected="true"
-          >
-            <div class="wizard-basic-step">
-              <b-form>
-                <b-form-group label="Name:">
-                  <b-form-input v-model="newItem.UserName" placeholder="UserName"/>
-                </b-form-group>
-                <b-form-group label="About:">
-                  <b-form-input v-model="newItem.About" placeholder="About"/>
-                </b-form-group>
-                <b-form-group label="Location:">
-                  <b-form-input v-model="newItem.Location" placeholder="Location"/>
-                </b-form-group>
-                <b-form-group label="Password:">
-                  <b-form-input v-model="newItem.PassWord" placeholder="Password"/>
-                </b-form-group>
-                <b-form-group label="Email:">
-                  <b-form-input v-model="newItem.Email" placeholder="Email"/>
-                </b-form-group>
-    
-              </b-form>
-            </div>
-          </tab>
+      <b-card-body>
 
-    
-
-          <tab type="done">
-            <div class="wizard-basic-step text-center">
-              <h2 class="mb-2">Save Changes?</h2>
-              <button
+        <b-form>
+          <b-form-group label="Name:">
+            <b-form-input v-model="newItem.username" placeholder="UserName"/>
+          </b-form-group>
+          <b-form-group label="About:">
+            <b-form-input v-model="newItem.about" placeholder="About"/>
+          </b-form-group>
+          <b-form-group label="Location:">
+            <b-form-input v-model="newItem.location" placeholder="Location"/>
+          </b-form-group>
+          <b-form-group label="Password:">
+            <b-form-input v-model="newItem.password" placeholder="Password"/>
+          </b-form-group>
+          <b-form-group label="Email:">
+            <b-form-input v-model="newItem.email" placeholder="Email"/>
+          </b-form-group>
+        </b-form>
+            <button
                 type="button"
                 class="btn btn-primary"
                 @click="addNewItem"
               >
                 save
               </button>
-            </div>
-          </tab>
-        </form-wizard>
       </b-card-body>
     </b-card>
   </b-modal>
@@ -80,17 +63,11 @@ export default {
     FormWizard,
     "vue-dropzone": VueDropzone,
   },
-  props: ["categoryID","loadProfile"],
+  props: ["categoryID","loadProfile","data"],
   data() {
     return {
-      
-     
+
       newItem: {
-        UserName: "",
-        About:"",
-        Email: "",
-        PassWord : "",
-        Location : "",
         
       },
 
@@ -109,14 +86,33 @@ export default {
     })
   },
   methods: {
+    loadProfile(){
+        console.log("Loading Profile");
+        console.log(this.$route.params.id);
+
+        const user = {
+            id:this.currentUser.id,
+        };
+        axios
+            .post(api+"showProfile/",user)
+            .then(response => {
+            console.log("user");
+            console.log(response);
+            return response.data;
+            })
+            .then(res => {
+                this.newItem=res;
+                console.log(res);
+            });
+    },
     addNewItem() {
       const user = {
         id:this.currentUser.id,
-        username: this.newItem.UserName,
-        about: this.newItem.About,
-        email: this.newItem.Email,
-        password: this.newItem.PassWord,
-        location: this.newItem.Location,
+        username: this.newItem.username,
+        about: this.newItem.about,
+        email: this.newItem.email,
+        password: this.newItem.password,
+        location: this.newItem.location,
       };
       axios
         .post(`${api}updatePerson/`, user)
@@ -175,6 +171,9 @@ export default {
       console.log(xhr);
     },
   },
+  mounted() {
+    this.loadProfile();
+  }
 };
 </script>
 
