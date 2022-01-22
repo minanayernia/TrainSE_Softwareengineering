@@ -14,7 +14,9 @@
             no-fade="true"
           >
             <b-dropdown-item
+            v-if="currentUser.username==data.submitter"
             v-b-modal.modalright
+            
             >{{ $t('EDIT') }}</b-dropdown-item>
 
             <b-dropdown-item
