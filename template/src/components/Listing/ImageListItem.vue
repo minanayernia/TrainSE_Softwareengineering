@@ -4,7 +4,7 @@
         <router-link :to="`/app/pages/product/details-alt/${data.resource_id}`" >
 
         <img src="https://i.pcmag.com/imagery/articles/0270lteaknt7h4pBahOR4az-40..v1580751227.jpg" class="card-img-top" :alt="data.title"  width="253" height="202" />
-        <b-badge pill variant="primary" class="position-absolute badge-top-left"><i class="fa fa-thumbs-up fa-2x"> 5</i></b-badge>
+        <b-badge pill variant="primary" class="position-absolute badge-top-left"><i class="fa fa-thumbs-up fa-2x"> {{data.likeCount}}</i></b-badge>
         </router-link> 
 
         <a class="btn btn-primary" :href="data.link" style="border-radius: 0px 0px 10px 10px;">Visit tutorial</a>
@@ -95,6 +95,20 @@ export default {
           };
         axios
           .post(api+"createLike/",like)
+          .then(response => {
+            console.log("bookmark");
+            this.loadItems();
+            console.log(response);
+            return response.data;
+          });
+        },
+        unlike(){
+          const like = {
+          person_id:this.currentUser.id.toString(),
+          resource_id: this.data.resource_id.toString(),
+          };
+        axios
+          .post(api+"deleteLike/",like)
           .then(response => {
             console.log("bookmark");
             this.loadItems();
