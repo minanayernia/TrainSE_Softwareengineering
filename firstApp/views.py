@@ -377,7 +377,7 @@ class orderbyLike_resourceList(APIView):
     allowed_methods = ['Post']
     
     def post(self, request, *args, **kwargs):
-
+        querySet = models.Resource.objects.all()
         # querySet = models.Resource.objects.annotate(count = Count(Like)).order_by('count')
         id = request.data.get('categoryId')
         personid = request.data.get('personId' , None)
@@ -386,6 +386,7 @@ class orderbyLike_resourceList(APIView):
         # id =1/
         cat = models.Category.objects.get(pk=id)
         querySet = querySet.filter(category = cat )
+
         resources_dic =[]
         for res in querySet:
             response_data = {}
@@ -436,7 +437,9 @@ class orderbyLike_resourceList(APIView):
             response_data['pub_date'] = res.pub_date
 
             resources_dic.append(response_data)
-        return Response(resources_dic)
+            # resources_dic.sort('likeCount')
+            newList = sorted(resources_dic , key = lambda dic : dic['likeCount'] , reverse=True)
+        return Response(newList)
 class CreateComment(CreateAPIView): 
     serializer_class = serializers.CommentSerializer
     allowed_methods = ['POST']
