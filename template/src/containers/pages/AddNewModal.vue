@@ -209,7 +209,7 @@ export default {
           this.newItem.link = "";
           this.newItem.description ="";
           this.newItem.tags =[];
-
+          this.$emit('update');
         });
     },
 

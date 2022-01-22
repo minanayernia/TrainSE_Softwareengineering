@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar fixed-top">
     <div class="d-flex align-items-center ml-5 navbar-left">
- 
+
       <div
         :class="{'search':true, 'mobile-view':isMobileSearch}"
         ref="searchContainer"
@@ -38,7 +38,6 @@
       </div>
       
 
-
     </div>
 
     <router-link class="navbar-logo" tag="a" :to="adminRoot">
@@ -58,48 +57,6 @@
         />
         <b-tooltip v-if="isDarkActive" target="tool-mode-switch" placement="left" title="Light Mode"></b-tooltip>
         <b-tooltip v-else target="tool-mode-switch" placement="left" title="Dark Mode"></b-tooltip>
-      </div>
-
-      <div class="header-icons d-inline-block align-middle">
-
-        <div v-if="currentUser!==null" class="position-relative d-inline-block">
-          <b-dropdown
-            variant="empty"
-            size="sm"
-            right
-            toggle-class="header-icon notificationButton"
-            menu-class="position-absolute mt-3 notificationDropdown"
-            no-caret
-          >
-            <template slot="button-content">
-              <i class="simple-icon-bell" />
-              <span class="count">3</span>
-            </template>
-            <vue-perfect-scrollbar :settings="{ suppressScrollX: true, wheelPropagation: false }">
-              <div
-                class="d-flex flex-row mb-3 pb-3 border-bottom"
-                v-for="(n,index) in notifications"
-                :key="index"
-              >
-                <router-link tag="a" :to="`${adminRoot}/pages/product/details`">
-                  <img
-                    :src="n.img"
-                    :alt="n.title"
-                    class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"
-                  />
-                </router-link>
-                <div class="pl-3 pr-2">
-                  <router-link tag="a" :to="`${adminRoot}/pages/product/details`">
-                    <p class="font-weight-medium mb-1">{{n.title}}</p>
-                    <p class="text-muted mb-0 text-small">{{n.date}}</p>
-                  </router-link>
-                </div>
-              </div>
-            </vue-perfect-scrollbar>
-          </b-dropdown>
-        </div>
-
-
       </div>
 
       <div v-if="currentUser!==null" class="user d-inline-block">

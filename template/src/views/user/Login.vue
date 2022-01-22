@@ -53,7 +53,7 @@ export default {
         return {
             form: {
                 username: "",
-                password: "xxxxxx"
+                password: ""
             },
         };
     },

@@ -80,6 +80,7 @@ const routes = [
               },
               {
                 path: "image-list/:id",
+                name:"resource-list",
                 component: () =>
                   import(/* webpackChunkName: "product" */ "./views/app/pages/product/ImageList")
               },

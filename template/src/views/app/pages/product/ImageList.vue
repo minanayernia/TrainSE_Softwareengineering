@@ -6,7 +6,7 @@
   <b-row class="app-row survey-app">
     <b-colxx class="disable-text-selection">
       <list-page-heading
-        :title="$t('Category Name')"
+        :title="title"
         :selectAll="selectAll"
         :isSelectedAll="isSelectedAll"
         :isAnyItemSelected="isAnyItemSelected"
@@ -46,7 +46,7 @@
       </template>
     </b-colxx>
 
-  </b-row>
+  </b-row>  
   </div>
 
 </template>
@@ -68,6 +68,7 @@ export default {
   },
   data() {
     return {
+      title:this.$route.params.name,
       resourceList:[],
       isLoad: false,
       apiBase: apiUrl + "/cakes/fordatatable",
@@ -146,7 +147,10 @@ export default {
         });
     },
     loadItems() {
-      console.log(this.currentUser)
+      console.log("load items");
+      console.log(this.$route.params)
+      this.title=this.$route.params.name;
+      console.log(this.$route.params.id)
       const data={
           categoryId:this.$route.params.id,
           personId:null,

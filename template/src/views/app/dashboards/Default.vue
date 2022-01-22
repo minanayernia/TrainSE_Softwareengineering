@@ -12,11 +12,11 @@
       <b-colxx lg="1" md="1" xl="1" sm="1">
       </b-colxx>
       <b-colxx  lg="10" md="10" xl="10" sm="10" class="mb-4">
-      
         <b-row>
           <b-colxx v-for="(category,index) in categoryList" :key="index" md="4" sm="6" lg="3" xxs="12">
             <b-card  class="mb-4 text-center">
-              <router-link :to="`/app/pages/product/image-list/${category.category_id}`" >
+              <router-link :to="{ name: 'resource-list', params: { id: category.category_id , name:category.title }}"  >
+              
                 <img
                   src="https://www.iceye.com/hubfs/Blog/Software_Engineering.jpg"
                   alt="Card image cap"
