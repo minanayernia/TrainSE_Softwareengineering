@@ -1,6 +1,7 @@
 from asyncio.windows_events import NULL
 from datetime import date, datetime
 from os import name
+from pyexpat import model
 from django.db.models import query
 from rest_framework import viewsets
 from rest_framework.generics import GenericAPIView, CreateAPIView, ListAPIView, RetrieveAPIView
@@ -259,6 +260,8 @@ class ListResource(APIView):
             response_data['title'] = res.title
             response_data['link'] = res.link
             # response_data['image'] = res.image
+            likeCount = models.Like.objects.filter(resc = res).count()
+            response_data['likeCount'] = likeCount
             if personid == None :
                 response_data['isbookmark'] = 0
                 response_data['isliked'] = 0
