@@ -234,8 +234,20 @@ export default {
         });
     },
     replyComment(id){
-      this.repleyID=id;
-      console.log(id)
+
+      const data = {
+        person_id:this.currentUser.id,
+        comment_id:id,
+      };
+      axios
+        .post(api+"reportComment/",data)
+        .then(response => {
+
+          return response.data;
+        })
+        .then(res => {
+
+        });
     },
     loadResources(){
       console.log("Loading single resouce");
