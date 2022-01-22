@@ -1207,26 +1207,76 @@ class SubmittedResourceList(CreateAPIView):
         personId = request.data.get('id')
         person = models.Person.objects.get(pk = personId)
         resourseList = models.Resource.objects.filter(submitter = person)
-        resualt = []
-        for resource in resourseList:
-            dic = {}
-            dic['resource_id'] = resource.id
-            dic['title'] = resource.title
-            dic['link'] = resource.link
-            likeCount = models.Like.objects.filter(resc = resource).count()
-            dic['likeCount'] = likeCount
-            tags = resource.tags.all()
-            taglist=[]
+        # resualt = []
+        # for resource in resourseList:
+        #     dic = {}
+        #     dic['resource_id'] = resource.id
+        #     dic['title'] = resource.title
+        #     dic['link'] = resource.link
+        #     likeCount = models.Like.objects.filter(resc = resource).count()
+        #     dic['likeCount'] = likeCount
+        #     tags = resource.tags.all()
+        #     taglist=[]
+        #     if tags.exists():
+        #         for tag in tags:
+        #             tg = {}
+        #             tg['title'] = tag.title
+        #             tg['tagid'] = tag.id
+        #             tg['type'] = tag.type.type
+        #             taglist.append(tg)
+        #     dic['tags'] = taglist
+        #     resualt.append(dic)
+        resources_dic =[]
+        for res in resourseList:
+            response_data = {}
+            response_data['resource_id'] = res.id
+            response_data['creator'] = res.submitter.username
+            response_data['title'] = res.title
+            response_data['link'] = res.link
+            # response_data['image'] = res.image
+            likeCount = models.Like.objects.filter(resc = res).count()
+            response_data['likeCount'] = likeCount
+            if personId == None :
+                response_data['isbookmark'] = 0
+                response_data['isliked'] = 0
+            else:
+                likeobject = models.Like.objects.filter(resc = res , pers = person )
+                allbookmarked = person.bookmarked.all()
+                print("like object")
+                print(likeobject)
+                if(likeobject):
+                    response_data['isliked'] = 1
+                else :
+                    response_data['isliked'] = 0
+                    
+                if allbookmarked.exists():
+                    if res in allbookmarked:
+                        response_data['isbookmark'] = 1
+                    else :
+                        response_data['isbookmark'] = 0
+                else:
+                    response_data['isbookmark'] = 0
+
+            print("callong all objects ")
+            tags = res.tags.all()
+            tagg = []
+            print("befor for")
+            print(tags)
             if tags.exists():
-                for tag in tags:
-                    tg = {}
-                    tg['title'] = tag.title
-                    tg['tagid'] = tag.id
-                    tg['type'] = tag.type.type
-                    taglist.append(tg)
-            dic['tags'] = taglist
-            resualt.append(dic)
-        return Response(resualt , status=status.HTTP_200_OK)
+                for tag in tags :
+                    # tagg.append(tag)
+                    dic = {}
+                    dic['id'] = tag.id
+                    dic['title'] = tag.title
+                    tagg.append(dic)
+                    print("inside for")
+
+            response_data['tags'] = tagg 
+            print("tag added successfuly")
+            response_data['pub_date'] = res.pub_date
+
+            resources_dic.append(response_data)
+        return Response(resources_dic , status=status.HTTP_200_OK)
         
 class LikedResourceList(CreateAPIView):
     serializer_class =serializers.RecourceSerializer
@@ -1240,26 +1290,76 @@ class LikedResourceList(CreateAPIView):
             resource = models.Resource.objects.get(pk = like.resc.id)
             resourceList.append(resource)
 
-        resualt = []
+        # resualt = []
+        # for res in resourceList:
+        #     dic = {}
+        #     dic['resource_id'] = res.id
+        #     dic['title'] = res.title
+        #     dic['link'] = res.link
+        #     likeCount = models.Like.objects.filter(resc = res).count()
+        #     dic['likeCount'] = likeCount
+        #     tags = res.tags.all()
+        #     taglist=[]
+        #     if tags.exists():
+        #         for tag in tags:
+        #             tg = {}
+        #             tg['title'] = tag.title
+        #             tg['tagid'] = tag.id
+        #             tg['type'] = tag.type.type
+        #             taglist.append(tg)
+        #     dic['tags'] = taglist
+        #     resualt.append(dic)
+        resources_dic =[]
         for res in resourceList:
-            dic = {}
-            dic['resource_id'] = res.id
-            dic['title'] = res.title
-            dic['link'] = res.link
+            response_data = {}
+            response_data['resource_id'] = res.id
+            response_data['creator'] = res.submitter.username
+            response_data['title'] = res.title
+            response_data['link'] = res.link
+            # response_data['image'] = res.image
             likeCount = models.Like.objects.filter(resc = res).count()
-            dic['likeCount'] = likeCount
+            response_data['likeCount'] = likeCount
+            if personId == None :
+                response_data['isbookmark'] = 0
+                response_data['isliked'] = 0
+            else:
+                likeobject = models.Like.objects.filter(resc = res , pers = person )
+                allbookmarked = person.bookmarked.all()
+                print("like object")
+                print(likeobject)
+                if(likeobject):
+                    response_data['isliked'] = 1
+                else :
+                    response_data['isliked'] = 0
+                    
+                if allbookmarked.exists():
+                    if res in allbookmarked:
+                        response_data['isbookmark'] = 1
+                    else :
+                        response_data['isbookmark'] = 0
+                else:
+                    response_data['isbookmark'] = 0
+
+            print("callong all objects ")
             tags = res.tags.all()
-            taglist=[]
+            tagg = []
+            print("befor for")
+            print(tags)
             if tags.exists():
-                for tag in tags:
-                    tg = {}
-                    tg['title'] = tag.title
-                    tg['tagid'] = tag.id
-                    tg['type'] = tag.type.type
-                    taglist.append(tg)
-            dic['tags'] = taglist
-            resualt.append(dic)
-        return Response(resualt , status=status.HTTP_200_OK)
+                for tag in tags :
+                    # tagg.append(tag)
+                    dic = {}
+                    dic['id'] = tag.id
+                    dic['title'] = tag.title
+                    tagg.append(dic)
+                    print("inside for")
+
+            response_data['tags'] = tagg 
+            print("tag added successfuly")
+            response_data['pub_date'] = res.pub_date
+
+            resources_dic.append(response_data)
+        return Response(resources_dic , status=status.HTTP_200_OK)
         
 class BookmarkedResourceList(CreateAPIView):
     serializer_class =serializers.RecourceSerializer
@@ -1268,26 +1368,77 @@ class BookmarkedResourceList(CreateAPIView):
         personId = request.data.get('id')
         person = models.Person.objects.get(pk = personId)
         bookmarkedList = person.bookmarked.all()
-        resualt = []
+        # resualt = []
+        # for res in bookmarkedList:
+        #     dic = {}
+        #     dic['resource_id'] = res.id
+        #     dic['title'] = res.title
+        #     dic['link'] = res.link
+        #     tags = res.tags.all()
+        #     taglist=[]
+        #     if tags.exists():
+        #         for tag in tags:
+        #             tg = {}
+        #             tg['title'] = tag.title
+        #             tg['tagid'] = tag.id
+        #             tg['type'] = tag.type.type
+        #             taglist.append(tg)
+        #     dic['tags'] = taglist
+        #     likeCount = models.Like.objects.filter(resc = res).count()
+        #     dic['likeCount'] = likeCount
+        #     resualt.append(dic)
+        resources_dic =[]
         for res in bookmarkedList:
-            dic = {}
-            dic['resource_id'] = res.id
-            dic['title'] = res.title
-            dic['link'] = res.link
-            tags = res.tags.all()
-            taglist=[]
-            if tags.exists():
-                for tag in tags:
-                    tg = {}
-                    tg['title'] = tag.title
-                    tg['tagid'] = tag.id
-                    tg['type'] = tag.type.type
-                    taglist.append(tg)
-            dic['tags'] = taglist
+            response_data = {}
+            response_data['resource_id'] = res.id
+            response_data['creator'] = res.submitter.username
+            response_data['title'] = res.title
+            response_data['link'] = res.link
+            # response_data['image'] = res.image
             likeCount = models.Like.objects.filter(resc = res).count()
-            dic['likeCount'] = likeCount
-            resualt.append(dic)
-        return Response(resualt , status=status.HTTP_200_OK)
+            response_data['likeCount'] = likeCount
+            if personId == None :
+                response_data['isbookmark'] = 0
+                response_data['isliked'] = 0
+            else:
+                likeobject = models.Like.objects.filter(resc = res , pers = person )
+                allbookmarked = person.bookmarked.all()
+                print("like object")
+                print(likeobject)
+                if(likeobject):
+                    response_data['isliked'] = 1
+                else :
+                    response_data['isliked'] = 0
+                    
+                if allbookmarked.exists():
+                    if res in allbookmarked:
+                        response_data['isbookmark'] = 1
+                    else :
+                        response_data['isbookmark'] = 0
+                else:
+                    response_data['isbookmark'] = 0
+
+            print("callong all objects ")
+            tags = res.tags.all()
+            tagg = []
+            print("befor for")
+            print(tags)
+            if tags.exists():
+                for tag in tags :
+                    # tagg.append(tag)
+                    dic = {}
+                    dic['id'] = tag.id
+                    dic['title'] = tag.title
+                    tagg.append(dic)
+                    print("inside for")
+
+            response_data['tags'] = tagg 
+            print("tag added successfuly")
+            response_data['pub_date'] = res.pub_date
+
+            resources_dic.append(response_data)
+
+        return Response(resources_dic , status=status.HTTP_200_OK)
 
 class AddBookmark(CreateAPIView):
     allowed_methods = ['Post']
