@@ -16,6 +16,11 @@
             <b-dropdown-item
             v-b-modal.modalright
             >{{ $t('EDIT') }}</b-dropdown-item>
+
+            <b-dropdown-item
+            @click="report($route.params.id)"
+            >{{ $t('REPORT') }}</b-dropdown-item>
+
             <edit-resource :loadResources= "loadResources":id="this.$route.params.id" ></edit-resource>
 
           </b-dropdown>
@@ -25,14 +30,11 @@
             <b-row>
               <b-colxx xxs="12" lg="4" class="mb-4">
                 <b-card class="mb-4" no-body>
-                 
                   <img src="https://i.pcmag.com/imagery/articles/0270lteaknt7h4pBahOR4az-40..v1580751227.jpg" alt="Detail" class="card-img-top" />
                   <b-button :href="data.link" variant="primary" style="border-radius: 0px 0px 10px 10px;">Visit tutorial</b-button>
                   <b-card-body>
                     <p class="text-muted text-small mb-2">{{ $t('pages.description') }}</p>
                     <p class="mb-3">{{data.description}}</p>
-                  
-                    
                     <p class="text-muted text-small mb-2">{{ $t('todo.labels') }}</p>
                     <div class="mb-3">
                       <p class="d-sm-inline-block mb-1">
@@ -177,6 +179,24 @@ export default {
     })
   },
   methods: {
+    report(id){
+      console.log("report")
+      console.log(this.currentUser)
+      const data = {
+        person_id:this.currentUser.id,
+        resource_id:this.$route.params.id,
+      };
+      axios
+        .post(api+"reportResource/",data)
+        .then(response => {
+
+          return response.data;
+        })
+        .then(res => {
+            this.loadResources();
+            console.log(res);
+        });
+    },
     likeComment (id){
       const like_data = {
         pers:this.currentUser.id.toString(),
