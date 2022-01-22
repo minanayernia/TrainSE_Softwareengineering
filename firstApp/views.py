@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 from datetime import date, datetime
+from itertools import count
 from os import name
 from pyexpat import model
 from django.db.models import query
@@ -12,6 +13,8 @@ from . import forms
 from django.shortcuts import render, redirect
 import json
 import base64
+
+from django.db.models import Count
 
 
 from django.shortcuts import render
@@ -310,6 +313,72 @@ class latest_resourceList(APIView):
     
     def post(self, request, *args, **kwargs):
         querySet = models.Resource.objects.all().order_by('-pub_date')
+        id = request.data.get('categoryId')
+        personid = request.data.get('personId' , None)
+        if (personid != None):
+            person = models.Person.objects.get(pk = personid)
+        # id =1/
+        cat = models.Category.objects.get(pk=id)
+        querySet = querySet.filter(category = cat )
+        resources_dic =[]
+        for res in querySet:
+            response_data = {}
+            response_data['resource_id'] = res.id
+            response_data['creator'] = res.submitter.username
+            response_data['title'] = res.title
+            response_data['link'] = res.link
+            # response_data['image'] = res.image
+            likeCount = models.Like.objects.filter(resc = res).count()
+            response_data['likeCount'] = likeCount
+            if personid == None :
+                response_data['isbookmark'] = 0
+                response_data['isliked'] = 0
+            else:
+                likeobject = models.Like.objects.filter(resc = res , pers = person )
+                allbookmarked = person.bookmarked.all()
+                print("like object")
+                print(likeobject)
+                if(likeobject):
+                    response_data['isliked'] = 1
+                else :
+                    response_data['isliked'] = 0
+                    
+                if allbookmarked.exists():
+                    if res in allbookmarked:
+                        response_data['isbookmark'] = 1
+                    else :
+                        response_data['isbookmark'] = 0
+                else:
+                    response_data['isbookmark'] = 0
+
+            print("callong all objects ")
+            tags = res.tags.all()
+            tagg = []
+            print("befor for")
+            print(tags)
+            if tags.exists():
+                for tag in tags :
+                    # tagg.append(tag)
+                    dic = {}
+                    dic['id'] = tag.id
+                    dic['title'] = tag.title
+                    tagg.append(dic)
+                    print("inside for")
+
+            response_data['tags'] = tagg 
+            print("tag added successfuly")
+            response_data['pub_date'] = res.pub_date
+
+            resources_dic.append(response_data)
+        return Response(resources_dic)
+
+class orderbyLike_resourceList(APIView):
+    serializer_class =serializers.CategorySerializer
+    allowed_methods = ['Post']
+    
+    def post(self, request, *args, **kwargs):
+
+        # querySet = models.Resource.objects.annotate(count = Count(Like)).order_by('count')
         id = request.data.get('categoryId')
         personid = request.data.get('personId' , None)
         if (personid != None):
@@ -1141,6 +1210,8 @@ class SubmittedResourceList(CreateAPIView):
             dic['resource_id'] = resource.id
             dic['title'] = resource.title
             dic['link'] = resource.link
+            likeCount = models.Like.objects.filter(resc = resource).count()
+            dic['likeCount'] = likeCount
             tags = resource.tags.all()
             taglist=[]
             if tags.exists():
@@ -1172,6 +1243,8 @@ class LikedResourceList(CreateAPIView):
             dic['resource_id'] = res.id
             dic['title'] = res.title
             dic['link'] = res.link
+            likeCount = models.Like.objects.filter(resc = res).count()
+            dic['likeCount'] = likeCount
             tags = res.tags.all()
             taglist=[]
             if tags.exists():
@@ -1208,6 +1281,8 @@ class BookmarkedResourceList(CreateAPIView):
                     tg['type'] = tag.type.type
                     taglist.append(tg)
             dic['tags'] = taglist
+            likeCount = models.Like.objects.filter(resc = res).count()
+            dic['likeCount'] = likeCount
             resualt.append(dic)
         return Response(resualt , status=status.HTTP_200_OK)
 

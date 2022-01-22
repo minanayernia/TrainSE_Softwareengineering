@@ -82,7 +82,8 @@ urlpatterns = [
     path('reportResource/' , views.ReportingResource.as_view()),
     path('getCategoryByID/' , views.GetCategoryByID.as_view()),
     path('deleteLike/' , views.RemoveLike.as_view()),
-    path('newstResourceList/' , views.latest_resourceList.as_view())
+    path('newstResourceList/' , views.latest_resourceList.as_view()),
+    path('orderbyLikeResourceList/' , views.orderbyLike_resourceList.as_view())
 ] 
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
