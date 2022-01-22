@@ -67,9 +67,7 @@ export default {
     })
   },
     methods: {
-        toggleItem(event, itemId) {
-            this.$emit('toggle-item', event, itemId)
-        },
+
         handleHover(hovered) {
             this.isHovered = hovered
         },

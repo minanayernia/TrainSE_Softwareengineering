@@ -42,7 +42,7 @@
                     >{{ $t('Edit') }}</b-button>
 
                 </div>
-                <edit-new-modal :loadProfile="loadProfile" :id="currentUser.id" ></edit-new-modal>
+                <edit-new-modal :loadProfile="loadProfile" :id="currentUser.id" :data="data"></edit-new-modal>
                 </b-row>
                     </b-card-body>
                     
@@ -66,7 +66,6 @@
                                 :key="item.resource_id"
                                 :data="item"
                                 :selected-items="selectedItems"
-                                @toggle-item="toggleItem"
                                 :loadItems="loadProfile"
                                 />
                         </b-colxx>
@@ -81,7 +80,6 @@
                                 :key="item.resource_id"
                                 :data="item"
                                 :selected-items="selectedItems"
-                                @toggle-item="toggleItem"
                                 @loadItems="loadProfile"
                                 />
                         </b-colxx>
@@ -95,7 +93,6 @@
                                 :key="item.resource_id"
                                 :data="item"
                                 :selected-items="selectedItems"
-                                @toggle-item="toggleItem"
                                 :loadItems="loadProfile"
                                 />
                         </b-colxx>
@@ -138,8 +135,7 @@ export default {
         
     },
     props: ["displayMode",
-    "selectedItems",
-    "toggleItem"],
+    "selectedItems"],
     data() {
         return {
             data:{},
@@ -152,9 +148,7 @@ export default {
         }
     },
     methods: {
-        toggleItem(event, itemId) {
-            this.$emit('toggle-item', event, itemId)
-        },
+
         loadProfile(){
             console.log("Loading Profile");
             console.log(this.$route.params.id);
