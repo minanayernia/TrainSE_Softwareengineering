@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from datetime import date, datetime
 from os import name
 from django.db.models import query
@@ -260,8 +261,17 @@ class ListResource(APIView):
             # response_data['image'] = res.image
             if personid == None :
                 response_data['isbookmark'] = 0
+                response_data['isliked'] = 0
             else:
+                likeobject = models.Like.objects.filter(resc = res , pers = person )
                 allbookmarked = person.bookmarked.all()
+                print("like object")
+                print(likeobject)
+                if(likeobject):
+                    response_data['isliked'] = 1
+                else :
+                    response_data['isliked'] = 0
+                    
                 if allbookmarked.exists():
                     if res in allbookmarked:
                         response_data['isbookmark'] = 1
@@ -1221,3 +1231,15 @@ class GetCategoryByID(CreateAPIView):
             subcatList.append(dic_sub)
         dic['subcategories'] = subcatList
         return Response(dic , status=status.HTTP_200_OK)
+
+
+class RemoveLike(CreateAPIView):
+    allowed_methods = ['Post']
+    def post(self, request, *args, **kwargs):
+        personId = request.data.get('person_id')
+        resourceId = request.data.get('resource_id')
+        person = models.Person.objects.get(pk = personId)
+        resource = models.Resource.objects.get(pk = resourceId)
+        likeobject = models.Like.objects.get(resc = resource , pers= person )
+        likeobject.delete()
+        return Response(status=status.HTTP_200_OK)
