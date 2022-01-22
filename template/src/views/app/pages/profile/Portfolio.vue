@@ -80,7 +80,7 @@
                                 :key="item.resource_id"
                                 :data="item"
                                 :selected-items="selectedItems"
-                                @loadItems="loadProfile"
+                                :loadItems="loadProfile"
                                 />
                         </b-colxx>
                     
