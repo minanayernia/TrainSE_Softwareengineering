@@ -79,7 +79,8 @@ urlpatterns = [
     path('addBookmark/' , views.AddBookmark.as_view()),
     path('deleteBookmark/' , views.DeleteBookmark.as_view()),
     path('reportComment/' , views.ReportingComment.as_view()),
-    path('reportResource/' , views.ReportingResource.as_view())
+    path('reportResource/' , views.ReportingResource.as_view()),
+    path('getCategoryByID/' , views.GetCategoryByID.as_view())
 ] 
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
