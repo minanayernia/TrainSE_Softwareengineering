@@ -118,3 +118,13 @@ class QualifiedInstructor(models.Model):
     create_date =   models.DateTimeField('create date' , auto_now_add=True)
     pers =          models.ForeignKey(Person , on_delete=models.CASCADE)
     resc =          models.ForeignKey(Resource , on_delete=models.CASCADE)
+
+class ReportResource(models.Model):
+    create_date =   models.DateTimeField('create date' , auto_now_add=True)
+    person =        models.ForeignKey(Person , on_delete=models.CASCADE)
+    resource=       models.ForeignKey(Resource , on_delete=models.CASCADE)
+
+class ReportComment(models.Model):
+    create_date =   models.DateTimeField('create date' , auto_now_add=True)
+    person =        models.ForeignKey(Person , on_delete=models.CASCADE)
+    comment =       models.ForeignKey(Commentt , on_delete=models.CASCADE)
