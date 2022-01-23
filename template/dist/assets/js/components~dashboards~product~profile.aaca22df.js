@@ -1,4 +1,4 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["components~product~profile"],{"14e1":function(t,e,n){},8096:function(t,e,n){},9339:function(t,e,n){(function(e){
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["components~dashboards~product~profile"],{"14e1":function(t,e,n){},8096:function(t,e,n){},9339:function(t,e,n){(function(e){
 /*!
  * Quill Editor v1.3.7
  * https://quilljs.com/
