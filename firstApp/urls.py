@@ -1,4 +1,5 @@
 from django.urls import include, path
+from django.views import View
 from rest_framework import routers
 from . import views
 
@@ -83,7 +84,9 @@ urlpatterns = [
     path('getCategoryByID/' , views.GetCategoryByID.as_view()),
     path('deleteLike/' , views.RemoveLike.as_view()),
     path('newstResourceList/' , views.latest_resourceList.as_view()),
-    path('orderbyLikeResourceList/' , views.orderbyLike_resourceList.as_view())
+    path('orderbyLikeResourceList/' , views.orderbyLike_resourceList.as_view()),
+    path('deleteCategory/' , views.DeleteCategory.as_view()),
+    path('updateCategory/' , views.UpdateCategory.as_view())
 ] 
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

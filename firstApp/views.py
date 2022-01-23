@@ -1,8 +1,9 @@
-from asyncio.windows_events import NULL
+# from asyncio.windows_events import NULL
 from datetime import date, datetime
 from itertools import count
 from os import name
 from pyexpat import model
+from unicodedata import category
 from django.db.models import query
 from rest_framework import viewsets
 from rest_framework.generics import GenericAPIView, CreateAPIView, ListAPIView, RetrieveAPIView
@@ -50,7 +51,7 @@ class SignUpPersonView(CreateAPIView): #create person
                                       email = request.data.get('email') , role = request.data.get('role'))
             newPerson.save()
             print("newperson added to datebase")
-            return Response({"username" : newPerson.username , "email" : newPerson.email , "id" : newPerson.id , "status" : 200} )
+            return Response({"username" : newPerson.username , "email" : newPerson.email , "id" : newPerson.id , "role" : newPerson.role, "status" : 200} )
 
 class LogIn(CreateAPIView):
     serializer_class =serializers.PersonSerializer
@@ -60,7 +61,7 @@ class LogIn(CreateAPIView):
         password = request.data.get('password')
         user = models.Person.objects.filter(username =username , password = password)
         if user.exists() :
-            return Response({"username" : user[0].username , "email" : user[0].email , "id" : user[0].id , "status" : 200} )
+            return Response({"username" : user[0].username , "email" : user[0].email , "id" : user[0].id , "role" : user[0].role ,"status" : 200} )
         else:
             return Response({"msg":"Username or Password is wronge" , "status" : 500 })
 
@@ -388,6 +389,7 @@ class orderbyLike_resourceList(APIView):
         querySet = querySet.filter(category = cat )
 
         resources_dic =[]
+        newList = []
         for res in querySet:
             response_data = {}
             response_data['resource_id'] = res.id
@@ -395,8 +397,10 @@ class orderbyLike_resourceList(APIView):
             response_data['title'] = res.title
             response_data['link'] = res.link
             # response_data['image'] = res.image
+            print("before like count")
             likeCount = models.Like.objects.filter(resc = res).count()
             response_data['likeCount'] = likeCount
+            print("we count the like count")
             if personid == None :
                 response_data['isbookmark'] = 0
                 response_data['isliked'] = 0
@@ -438,7 +442,12 @@ class orderbyLike_resourceList(APIView):
 
             resources_dic.append(response_data)
             # resources_dic.sort('likeCount')
-            newList = sorted(resources_dic , key = lambda dic : dic['likeCount'] , reverse=True)
+            if resources_dic :
+                newList = sorted(resources_dic , key = lambda dic : dic['likeCount'] , reverse=True)
+                print("hey not empty")
+            else :
+                newList = resources_dic
+                print("hey this is empty")
         return Response(newList)
 class CreateComment(CreateAPIView): 
     serializer_class = serializers.CommentSerializer
@@ -505,14 +514,40 @@ class UpdateResource(CreateAPIView):
     allowed_methods = ['POST']
     def post(self, request, *args, **kwargs):
         idsrc = request.data.get("id")
+        idcategory = request.data.get("category")
+        category = models.Category.objects.get(pk = idcategory)
+        
+        description = request.data.get("description")
         rsc = models.Resource.objects.get(pk = idsrc)
+        rsc.category = category
+        rsc.description = description
+        tagids= request.data.get("tags")
+        subids= request.data.get("subs")
         # id = request.data.get('submitter' , None)
         # pr = models.Person.objects.get(pk = id)
         # rsc.submitter = pr
         rsc.title = request.data.get("title" )
         rsc.link = request.data.get("link" )
-        #tag
-        #date must be change?
+        if rsc.tags.all().exists():
+            print("yes this is here")
+            tags = rsc.tags.all()
+            for tag in tags :
+                rsc.tags.remove(tag)
+                print("tag deleted")
+        for tagid in tagids :
+            newtag = models.Tag.objects.get(pk = tagid)
+            rsc.tags.add(newtag)
+            
+        
+        if rsc.subcategories.all().exists():
+            subcategories = rsc.subcategories.all()
+            for sub in subcategories:
+                rsc.subcategories.remove(sub)
+        for subid in subids :
+            newsub = models.Subcategory.objects.get(pk = subid)
+            rsc.subcategories.add(newsub)
+            
+        
         rsc.save()
         print("hey it was successful")
         
@@ -650,9 +685,9 @@ class UpdateCategory(CreateAPIView):
     serializer_class =serializers.CategorySerializer
     allowed_methods = ['POST']
     def post(self, request, *args, **kwargs):
-        idcat = request.data.get("id")
+        idcat = request.data.get("category_id")
         cat = models.Category.objects.get(pk = idcat)
-        id = request.data.get('creator' , None)
+        id = request.data.get('creator_id' , None)
         pr = models.Person.objects.get(pk = id)
         cat.creator = pr
         cat.title = request.data.get("title" )
@@ -738,14 +773,43 @@ class SearchResource(APIView):
     def post(self, request, *args, **kwargs):
         text = request.data.get("text")
         cat = request.data.get("categoryID")
+        personid = request.data.get('personId' , None)
+        if (personid != None):
+            person = models.Person.objects.get(pk = personid)
         resources = models.Resource.objects.filter(category = cat , title__icontains=text) 
         result = []
         print("seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
         for resc in resources :
             dic = {}
+            dic['resource_id'] = resc.id
             dic['title'] = resc.title    
             dic['submitterId'] = resc.submitter.id 
             dic['categoryId'] = resc.category.id 
+
+            likeCount = models.Like.objects.filter(resc = resc).count()
+            dic['likeCount'] = likeCount
+            if personid == None :
+                dic['isbookmark'] = 0
+                dic['isliked'] = 0
+            else:
+                likeobject = models.Like.objects.filter(resc = resc , pers = person )
+                allbookmarked = person.bookmarked.all()
+                print("like object")
+                print(likeobject)
+                if(likeobject):
+                    dic['isliked'] = 1
+                else :
+                    dic['isliked'] = 0
+                    
+                if allbookmarked.exists():
+                    if resc in allbookmarked:
+                        dic['isbookmark'] = 1
+                    else :
+                        dic['isbookmark'] = 0
+                else:
+                    dic['isbookmark'] = 0
+
+
             tags = []
             taglist = resc.tags.all()
             print(taglist )
@@ -795,6 +859,7 @@ class SingleResourceView(APIView):
         result = []
         # for res in resources:
         dic = {}
+        dic['category'] = resource.category.id
         dic['description'] = resource.description
         dic['title'] = resource.title
         dic['submitter'] = resource.submitter.username
@@ -821,7 +886,22 @@ class SingleResourceView(APIView):
             cms.append(com)
         dic['comment'] = cms
         tags = []
+        subs = []
+        tagids = []
         taglist = resource.tags.all()
+        subslist = resource.subcategories.all()
+
+        if subslist.exists():
+            for sub in subslist :
+                subs.append(sub.id)
+        dic['subs'] = subs
+
+
+        if taglist.exists():
+            for tag in taglist:
+                tagids.append(tag.id)
+        dic['tagids'] = tagids
+          
         print(taglist)
         if taglist.exists():
             for tag in taglist:
