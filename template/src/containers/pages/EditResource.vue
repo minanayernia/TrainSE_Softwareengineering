@@ -3,7 +3,7 @@
   <b-modal
     id="edit"
     ref="edit"
-    title="Add New Resource"
+    title="Edit Resource"
     size="md"
     hide-footer
   >
