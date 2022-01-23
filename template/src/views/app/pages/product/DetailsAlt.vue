@@ -46,10 +46,9 @@
                     <b-card class="mb-4 d-flex flex-row" no-body>
               <router-link to="?" class="d-flex">
                 <div
-                  src="/assets/img/profiles/l-1.jpg"
-                  alt="Card image cap"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDqZLNNtpV-cNZfqbScWb3_Ny0C15rPO9mgg&usqp=CAU"
                   class="align-self-center list-thumbnail-letters rounded-circle m-4 small"
-                >SK</div>
+                >S</div>
               </router-link>
               <div class="d-flex flex-grow-1 min-width-zero">
                 <div

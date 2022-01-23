@@ -1,16 +1,7 @@
 <template>
   <nav class="navbar fixed-top">
     <div class="d-flex align-items-center ml-5 navbar-left">
-    </div>
-
-    <router-link class="navbar-logo" tag="a" :to="adminRoot">
-      <span class="logo d-none d-xs-block"></span>
-      <span class="logo-mobile d-block d-xs-none"></span>
-    </router-link>
-
-    <div class="navbar-right">
-    
-      <div class="d-none d-md-inline-block align-middle mr-3">
+          <div class="d-none d-md-inline-block align-middle mr-3">
         <switches
           id="tool-mode-switch"
           v-model="isDarkActive"
@@ -21,6 +12,16 @@
         <b-tooltip v-if="isDarkActive" target="tool-mode-switch" placement="left" title="Light Mode"></b-tooltip>
         <b-tooltip v-else target="tool-mode-switch" placement="left" title="Dark Mode"></b-tooltip>
       </div>
+    </div>
+
+    <router-link class="navbar-logo" tag="a" :to="adminRoot">
+      <span class="logo d-none d-xs-block"></span>
+      <span class="logo-mobile d-block d-xs-none"></span>
+    </router-link>
+
+    <div class="navbar-right">
+    
+
 
       <div v-if="currentUser!==null" class="user d-inline-block">
         <b-dropdown
@@ -35,7 +36,7 @@
             <span class="name">{{currentUser.username}}</span>
             <span>
 
-            <img  src="/assets/img/profiles/l-1.jpg" />
+            <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU" />
 
             </span>
           </template>

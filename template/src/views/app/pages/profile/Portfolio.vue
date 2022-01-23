@@ -12,7 +12,7 @@
                         
                     </div>
                     
-                    <single-lightbox thumb="/assets/img/profiles/1.jpg" large="/assets/img/profiles/1.jpg" class-name="card-img-top" />
+                    <single-lightbox thumb="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU" large="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU" class-name="card-img-top" />
                     
                     <b-card-body>
                         <p class="text-muted text-small mb-2">{{$t('User Name')}}</p>

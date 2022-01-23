@@ -130,9 +130,13 @@ export default {
       const data={
         categoryId:this.$route.params.id,
         tags:tags,
-        subcategories:subcategories
-
+        subcategories:subcategories,
+        personId:null
       };
+      if(this.currentUser != null){
+
+        data.personId=this.currentUser.id;
+      }
       axios
         .post(api+"filterResourceList/",data)
         .then(response => {
