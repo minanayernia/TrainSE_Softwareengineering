@@ -1181,7 +1181,9 @@ class FilterResourceList(CreateAPIView):
         id = request.data.get('categoryId')
         cat = models.Category.objects.get(pk=id)
         querySet = querySet.filter(category = cat )
-
+        personid = request.data.get('personId' , None)
+        if (personid != None):
+            person = models.Person.objects.get(pk = personid)
         tagsIDsList = request.data.get('tags')
         tagsList=[]
         for tagid in tagsIDsList:
@@ -1214,6 +1216,43 @@ class FilterResourceList(CreateAPIView):
             response_data['creator'] = res.submitter.username
             response_data['title'] = res.title
             response_data['link'] = res.link
+
+            likeCount = models.Like.objects.filter(resc = res).count()
+            response_data['likeCount'] = likeCount
+            if personid == None :
+                response_data['isbookmark'] = 0
+                response_data['isliked'] = 0
+            else:
+                likeobject = models.Like.objects.filter(resc = res , pers = person )
+                allbookmarked = person.bookmarked.all()
+                print("like object")
+                print(likeobject)
+                if(likeobject):
+                    response_data['isliked'] = 1
+                else :
+                    response_data['isliked'] = 0
+                    
+                if allbookmarked.exists():
+                    if res in allbookmarked:
+                        response_data['isbookmark'] = 1
+                    else :
+                        response_data['isbookmark'] = 0
+                else:
+                    response_data['isbookmark'] = 0
+
+
+            tags = []
+            taglist = res.tags.all()
+            print(taglist )
+            print(str(res.title ))
+            if taglist.exists():
+                for tag in taglist:
+                    tg = {}
+                    tg['title'] = tag.title
+                    tg['tagid'] = tag.id
+                    tags.append(tg)
+            response_data['tags'] = tags
+
             # response_data['image'] = res.image
 
             # print("callong all objects ")
