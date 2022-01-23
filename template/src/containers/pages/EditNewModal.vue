@@ -20,9 +20,7 @@
           <b-form-group label="Location:">
             <b-form-input v-model="newItem.location" placeholder="Location"/>
           </b-form-group>
-          <b-form-group label="Password:">
-            <b-form-input v-model="newItem.password" placeholder="Password"/>
-          </b-form-group>
+
           <b-form-group label="Email:">
             <b-form-input v-model="newItem.email" placeholder="Email"/>
           </b-form-group>

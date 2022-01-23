@@ -1,25 +1,6 @@
 <template>
   <nav class="navbar fixed-top">
     <div class="d-flex align-items-center ml-5 navbar-left">
-
-      <div
-        :class="{'search':true, 'mobile-view':isMobileSearch}"
-        ref="searchContainer"
-        @mouseenter="isSearchOver=true"
-        @mouseleave="isSearchOver=false"
-      >
-        <b-input
-          :placeholder="$t('menu.search')"
-          @keypress.native.enter="search"
-          v-model="searchKeyword"
-        />
-        <span class="search-icon" @click="searchClick">
-          <i class="simple-icon-magnifier"></i>
-        </span>
-      </div>
-
-      
-
     </div>
 
     <router-link class="navbar-logo" tag="a" :to="adminRoot">
