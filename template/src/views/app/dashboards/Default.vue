@@ -14,7 +14,7 @@
       <b-colxx  lg="10" md="10" xl="10" sm="10" class="mb-4">
         <b-row>
 
-          <b-colxx v-if="currentUser.role=='A'" md="4" sm="6" lg="3" xxs="12">
+          <b-colxx v-if="currentUser!=null && currentUser.role=='A'" md="4" sm="6" lg="3" xxs="12">
             <b-card  class="mb-4 text-center" v-b-modal.modalright>
                 <img
                   src="https://cdn4.iconfinder.com/data/icons/user-interface-131/32/add-512.png"
@@ -37,8 +37,8 @@
                 />
                 <h6 class="mb-1 card-subtitle">{{category.title}}</h6>
               </router-link>
-                <hr v-if="currentUser.role=='A'"/>
-                <b-row v-if="currentUser.role=='A'">
+                <hr v-if="currentUser!=null && currentUser.role=='A'"/>
+                <b-row v-if="currentUser!=null && currentUser.role=='A'">
                   <b-colxx  lg="6">
                     <b-button  variant="outline-primary" class="btn  btn-block  default text-center rounded" @click="changeId(category.category_id)" v-b-modal.modall
                       ><i class="fa fa-edit fa-fw fa-lg"></i></b-button>

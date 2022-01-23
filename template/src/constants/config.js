@@ -5,7 +5,7 @@ export const adminRoot = '/app';
 export const searchPath = `${adminRoot}/pages/miscellaneous/search`
 export const buyUrl = 'https://1.envato.market/nEyZa'
 export const apiUrl = 'https://api.coloredstrategies.com';
-export const api = 'http://87.107.146.208:8000/';
+export const api = 'http://172.16.206.109:8000/';
 
 export const subHiddenBreakpoint = 1440
 export const menuHiddenBreakpoint = 768
