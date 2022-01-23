@@ -216,7 +216,12 @@ export default {
       const data={
         text:val,
         categoryID:this.$route.params.id,
+        personId:null,
       };
+      if(this.currentUser != null){
+
+        data.personId=this.currentUser.id;
+      }
       axios
         .post(api+"searchResource/",data)
         .then(response => {

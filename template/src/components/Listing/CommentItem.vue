@@ -4,11 +4,13 @@
     
     <router-link tag="a" :to="detailPath">
         <img src="/assets/img/profiles/l-1.jpg" class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
+        
+
     </router-link>
 
     <div class="pl-3 pr-2">
         <router-link tag="a" :to="detailPath">
-            <p class="font-weight-medium mb-0 " maxlength = "10">{{ data.text }}</p>
+            <p class="font-weight-medium mb-0 " maxlength = "10">{{ data.person_name }}: <span class="text-muted mb-1 text-small">{{ data.text }}</span></p>
             <p class="text-muted mb-1 text-small">{{ convertFromStringToDate(data.create_date) }}</p>
             <div>
                 <i class="iconsminds-like">{{data.likecommentcount}}</i>

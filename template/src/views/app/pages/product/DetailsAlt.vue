@@ -15,7 +15,7 @@
           >
             <b-dropdown-item
             v-if="currentUser.username==data.submitter"
-            v-b-modal.modalright
+            v-b-modal.edit
             
             >{{ $t('EDIT') }}</b-dropdown-item>
 
@@ -23,7 +23,7 @@
             @click="report($route.params.id)"
             >{{ $t('REPORT') }}</b-dropdown-item>
 
-            <edit-resource :loadResources= "loadResources":id="this.$route.params.id" ></edit-resource>
+            <edit-resource @update="loadResources" :id="this.$route.params.id" :categoryId="data.category" ></edit-resource>
 
           </b-dropdown>
         </div>
