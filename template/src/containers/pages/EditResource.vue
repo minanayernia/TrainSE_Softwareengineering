@@ -1,8 +1,8 @@
 
 <template>
   <b-modal
-    id="modalright"
-    ref="modalright"
+    id="edit"
+    ref="edit"
     title="Add New Resource"
     size="md"
     hide-footer
@@ -17,28 +17,50 @@
             <div class="wizard-basic-step">
               <b-form>
                 <b-form-group label="Title:">
-                  <b-form-input v-model="newResource.Title" placeholder="Title"/>
+                  <b-form-input v-model="newItem.title" placeholder="enter title of resource"/>
                 </b-form-group>
                 <b-form-group label="Link:">
-                  <b-form-input v-model="newResource.Link" placeholder="Enter Link"/>
+                  <b-form-input v-model="newItem.link" placeholder="enter link to resource"/>
                 </b-form-group>
-                
+                <b-form-group label="Description: (optional)">
+                  <b-textarea v-model="newItem.description" :rows="4" :max-rows="2" placeholder="enter description of resource"/>
+                </b-form-group>
     
               </b-form>
             </div>
           </tab>
 
-    
+         <tab
+            name="tags"
+            :selected="false"
+          >
+            <div class="wizard-basic-step">
+
+              <div v-for="(filterItem,index1) in filters" :key="index1">
+                <label >{{filterItem.title}}</label>
+                <b-form-checkbox-group v-model="newItem.tagids" stacked class="list-unstyled mb-4">
+                  <b-form-checkbox  v-for="(tag, index2) in filterItem.tags"  :key="index2" :name="filterItem.title" :value="tag.id">{{tag.title}}</b-form-checkbox>
+                </b-form-checkbox-group>   
+              </div>
+
+              <div v-for="(filterItem,index3) in subCategories" :key="index3">
+                <label >{{filterItem.title}}</label>
+                <b-form-checkbox-group v-model="newItem.subs" stacked class="list-unstyled mb-4">
+                  <b-form-checkbox  v-for="(tag, index4) in filterItem.tags" :key="index4" :name="filterItem.title" :value="tag.id">{{tag.title}}</b-form-checkbox>
+                </b-form-checkbox-group>   
+              </div>
+            </div>
+          </tab>
 
           <tab type="done">
             <div class="wizard-basic-step text-center">
-              <h2 class="mb-2">Save Changes?</h2>
+              <h2 class="mb-2">Are you sure you want to submit this resource?</h2>
               <button
                 type="button"
                 class="btn btn-primary"
                 @click="addNewItem"
               >
-                save
+                submit
               </button>
             </div>
           </tab>
@@ -72,24 +94,40 @@ export default {
     FormWizard,
     "vue-dropzone": VueDropzone,
   },
-  props: ["id","loadResources"],
+  props: ["id","categoryId"],
   data() {
     return {
-      
-     
-      newResource: {
-        Title:"",
-        Link:"",
-        
+      tags:[],
+      filters:[],
+      subCategories:[],
+      filter:[],
+      selectedFilters:[],
+      selectedsubCategories:[],
+      checkBoxTags: [
+          { text: 'free', value: 1 },
+          { text: 'paid', value: 2 },
+          { text: 'beginner', value: 3 },
+          { text: 'advanced', value: 4 }
+        ],
+      newItem: {
+
       },
 
       error: "",
 
-     
+      mainImageDropzoneOptions: {
+        url: `${apiUrl}/upload`,
+        thumbnailHeight: 150,
+        maxFilesize: 2,
+        maxFiles: 1,
+        acceptedFiles: "image/*",
+        dictDefaultMessage: "drop image of tutorial in this box",
+        previewTemplate: this.dropzoneTemplate(),
+      }
 
     };
   },
-    computed: {
+  computed: {
     ...mapGetters({
       currentUser: "currentUser",
       menuType: "getMenuType",
@@ -98,11 +136,68 @@ export default {
     })
   },
   methods: {
+    
+    loadFilters(){
+      console.log()
+
+      axios
+        .get(api+"ListTags/")
+        .then(response => {
+          console.log("tags list");
+          console.log(response);
+          return response.data;
+        })
+        .then(res => {
+            this.tags = res;
+            for (var i = 0; i <res.length; i++) {
+              if(!this.filter.includes(res[i].type)){
+                this.filter.push(res[i].type);
+              }
+            }
+            for (var j=0; j < this.filter.length; j++) {
+              var temp=[];
+              for (var i = 0; i <this.tags.length; i++) {
+                if(this.filter[j]==this.tags[i].type){
+                  temp.push(this.tags[i]);
+                }
+              }
+              this.filters.push({title:this.filter[j],tags:temp})
+            }
+            console.log("filters")
+            console.log(this.filters)
+      });
+    },
+
+    loadSubCategory(){
+      console.log("category id sub")
+      console.log(this.categoryId)
+      const data={
+        categoryId:this.categoryId
+      }
+      if(this.categoryId!=null){
+        axios
+        .post(api+"subcategoryList/",data)
+        .then(response => {
+          return response.data;
+        })
+        .then(res => {
+          this.subCategories.push({title:"cubcategory",tags:res})
+          console.log(this.filters)
+      });
+      }
+
+    },
+
     addNewItem() {
       const resource = {
-        id:this.$route.params.id,
-        title: this.newResource.Title,
-        link: this.newResource.Link,
+        id:this.id,
+        submitter:this.newItem.submitter,
+        category:this.newItem.category,
+        title: this.newItem.title,
+        link: this.newItem.link,
+        description: this.newItem.description,
+        tags: this.newItem.tagids,
+        subs: this.newItem.subs,
       };
       axios
         .post(`${api}updateResource/`, resource)
@@ -110,20 +205,29 @@ export default {
           return response.data;
         })
         .then((res) => {
-          console.log("edit resource")
-          console.log(res);
-          this.loadResources(),
-          
-          this.hideModal("modalright");
-          this.newResource.title = "";
-          this.newResource.Link = "";
-        
-          
-
+          this.$emit('update');
+          this.hideModal("edit");
         });
-        
     },
 
+    loadResource(){
+      console.log("Loading single resouce");
+      console.log(this.id);
+      const resource = {
+        resourceId:this.id,
+      };
+      axios
+        .post(api+"singleResource/",resource)
+        .then(response => {
+          console.log("res list");
+          console.log(response);
+          return response.data;
+        })
+        .then(res => {
+            this.newItem=res;
+            console.log(res);
+        });
+    },
     hideModal(refname) {
       this.$refs[refname].hide();
     },
@@ -160,6 +264,18 @@ export default {
       console.log(xhr);
     },
   },
+  mounted() {
+    console.log("sub")
+    console.log(this.categoryId)
+    this.loadSubCategory();
+    this.loadFilters();
+    this.loadResource();
+  },
+  watch: {
+    categoryId(){
+      this.loadSubCategory();
+    }
+  }
 };
 </script>
 
