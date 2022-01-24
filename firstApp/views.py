@@ -1658,3 +1658,84 @@ class RemoveLike(CreateAPIView):
         likeobject = models.Like.objects.get(resc = resource , pers= person )
         likeobject.delete()
         return Response(status=status.HTTP_200_OK)
+
+class SearchResourceInMainPage(APIView):
+    serializer_class =serializers.RecourceSerializer
+    allowed_methods = ['POST']
+    def post(self, request, *args, **kwargs):
+        text = request.data.get("text")
+        # cat = request.data.get("categoryID")
+        personid = request.data.get('personId' , None)
+        if (personid != None):
+            person = models.Person.objects.get(pk = personid)
+        resources = models.Resource.objects.filter(title__icontains=text) 
+        result = []
+        print("seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+        for resc in resources :
+            dic = {}
+            dic['resource_id'] = resc.id
+            dic['title'] = resc.title    
+            dic['submitterId'] = resc.submitter.id 
+            dic['categoryId'] = resc.category.id 
+
+            likeCount = models.Like.objects.filter(resc = resc).count()
+            dic['likeCount'] = likeCount
+            if personid == None :
+                dic['isbookmark'] = 0
+                dic['isliked'] = 0
+            else:
+                likeobject = models.Like.objects.filter(resc = resc , pers = person )
+                allbookmarked = person.bookmarked.all()
+                print("like object")
+                print(likeobject)
+                if(likeobject):
+                    dic['isliked'] = 1
+                else :
+                    dic['isliked'] = 0
+                    
+                if allbookmarked.exists():
+                    if resc in allbookmarked:
+                        dic['isbookmark'] = 1
+                    else :
+                        dic['isbookmark'] = 0
+                else:
+                    dic['isbookmark'] = 0
+
+
+            tags = []
+            taglist = resc.tags.all()
+            print(taglist )
+            print(str(resc.title ))
+            if taglist.exists():
+                for tag in taglist:
+                    tg = {}
+                    tg['title'] = tag.title
+                    tg['tagid'] = tag.id
+                    tags.append(tg)
+            dic['tags'] = tags
+            dic['link'] = resc.link
+            dic['pub_date'] = resc.pub_date
+            # with open(resc.image.path , "rb") as image_file:
+            #     image_data = base64.b64encode(image_file.read()).decode('utf-8')
+            # dic['image'] = image_data
+            result.append(dic)
+        
+        return Response(result)
+
+
+class SendRequestNotification(APIView):
+    serializer_class =serializers.RecourceSerializer
+    allowed_methods = ['POST']
+    def post(self, request, *args, **kwargs):
+        personId = request.data.get("personId")
+
+        queryset = models.Question.objects.all().order_by("-id")
+        finalList = []
+        for question in queryset :
+            dic = {}
+            dic['request_text'] = question.request_text
+            dic['whoAskID'] = question.whoAsk.id
+            dic['whoAskName'] = question.whoAsk.username
+            finalList.append(dic)
+        return Response(finalList , status=status.HTTP_200_OK)
+        

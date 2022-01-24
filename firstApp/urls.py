@@ -86,7 +86,9 @@ urlpatterns = [
     path('newstResourceList/' , views.latest_resourceList.as_view()),
     path('orderbyLikeResourceList/' , views.orderbyLike_resourceList.as_view()),
     path('deleteCategory/' , views.DeleteCategory.as_view()),
-    path('updateCategory/' , views.UpdateCategory.as_view())
+    path('updateCategory/' , views.UpdateCategory.as_view()),
+    path('SearchResourceInMainPage/' , views.SearchResourceInMainPage.as_view()),
+    path('SendRequestNotification/' , views.SendRequestNotification.as_view())
 ] 
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
