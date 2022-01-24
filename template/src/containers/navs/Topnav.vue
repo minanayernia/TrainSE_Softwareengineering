@@ -42,7 +42,7 @@
           </template>
           <b-dropdown-item @click="goToProfile">My Profile</b-dropdown-item>
           <b-dropdown-item @click="goToNotif">Notifications</b-dropdown-item>
-          <b-dropdown-item v-b-modal.request>Request a Feature</b-dropdown-item>
+          <b-dropdown-item v-if="currentUser.role=='U'" v-b-modal.request>Request a Feature</b-dropdown-item>
 
           <b-dropdown-divider />
           <b-dropdown-item @click="logout">Sign out</b-dropdown-item>

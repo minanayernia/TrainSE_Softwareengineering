@@ -1,17 +1,13 @@
 <template>
-
   <div class="disable-text-selection">
     <b-row class="app-row survey-app">
       <b-colxx lg="2"></b-colxx>
       <b-colxx lg="10">
       <div class="mb-2 text-center">
         <h1>Notifications</h1>
-
       </div>
       <div class="separator mb-5" />
-
       <b-row key="itemList">
-        
         <b-colxx xxs="12" v-for="(item,index) in Items" :key="`item${index}`">
           <survey-list-item
             :key="item.id"
@@ -133,15 +129,32 @@ export default {
       const data={
         id:this.currentUser.id,
       };
-      axios
-        .post(api+"showNotification/",data)
-        .then(response => {
-          console.log(response);
-          return response.data;
-        })
-        .then(res => {
-          this.Items=res;
-        });
+      const data2={
+        personId:this.currentUser.id,
+      }
+      if(this.currentUser.role=="A"){
+        axios
+          .post(api+"SendRequestNotification/",data2)
+          .then(response => {
+            console.log(response);
+            return response.data;
+          })
+          .then(res => {
+            this.Items=res;
+          });
+      }
+      else{
+        axios
+          .post(api+"showNotification/",data)
+          .then(response => {
+            console.log(response);
+            return response.data;
+          })
+          .then(res => {
+            this.Items=res;
+          });
+      }
+
     },
 
     changeOrderBy(sort) {
