@@ -13,7 +13,8 @@
                     </div>
                     
                     <single-lightbox thumb="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU" large="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU" class-name="card-img-top" />
-                    
+                                      <b-button :href="data.link" v-b-modal.modalright variant="primary" style="border-radius: 0px 0px 10px 10px;">Edit Profile</b-button>
+
                     <b-card-body>
                         <p class="text-muted text-small mb-2">{{$t('User Name')}}</p>
                         <p class="mb-3">
@@ -30,18 +31,7 @@
                         <p class="mb-3">{{data.email}}</p>
 
                         <b-row>                   
-                    <div class="top-right-button-container">
-                    <b-button
-                    v-b-modal.modalright
-                    variant="primary"
-                    size="lg"
-                    
-                    class="btn btn-default btn-lg btn-block"
-                    style="border-radius: 10px 10px 10px 10px; width: 413px;"
-                    Large button
-                    >{{ $t('Edit') }}</b-button>
-
-                </div>
+ 
                 <edit-new-modal :loadProfile="loadProfile" :id="currentUser.id" :data="data"></edit-new-modal>
                 </b-row>
                     </b-card-body>
