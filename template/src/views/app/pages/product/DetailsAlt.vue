@@ -150,6 +150,9 @@ export default {
   },
   methods: {
     VideoQuality(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -166,6 +169,9 @@ export default {
         });
     },
     ContentQuality(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -182,6 +188,9 @@ export default {
         });
     },
     CourseDepth(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -198,6 +207,9 @@ export default {
         });
     },
     CoursePace(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -214,6 +226,9 @@ export default {
         });
     },
     QualifiedInstructor(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -230,6 +245,9 @@ export default {
         });
     },
     report(id){
+      if(this.currentUser==null){
+        alert("You have to login for this feature");
+      }
       console.log("report")
       console.log(this.currentUser)
       const data = {
@@ -248,6 +266,9 @@ export default {
         });
     },
     likeComment (id){
+      if(this.currentUser==null){
+        alert("You have to login for this feature");
+      }
       const like_data = {
         pers:this.currentUser.id.toString(),
         comment:id.toString(),
@@ -264,6 +285,9 @@ export default {
         });
     },
     send(){
+      if(this.currentUser==null){
+        alert("You have to login for this feature");
+      }
       const comment = {
         pers:this.currentUser.id,
         resc:this.$route.params.id,
