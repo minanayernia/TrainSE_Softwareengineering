@@ -46,10 +46,9 @@
                     <b-card class="mb-4 d-flex flex-row" no-body>
               <router-link to="?" class="d-flex">
                 <div
-                  src="/assets/img/profiles/l-1.jpg"
-                  alt="Card image cap"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDqZLNNtpV-cNZfqbScWb3_Ny0C15rPO9mgg&usqp=CAU"
                   class="align-self-center list-thumbnail-letters rounded-circle m-4 small"
-                >SK</div>
+                >S</div>
               </router-link>
               <div class="d-flex flex-grow-1 min-width-zero">
                 <div
@@ -151,6 +150,9 @@ export default {
   },
   methods: {
     VideoQuality(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -167,6 +169,9 @@ export default {
         });
     },
     ContentQuality(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -183,6 +188,9 @@ export default {
         });
     },
     CourseDepth(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -199,6 +207,9 @@ export default {
         });
     },
     CoursePace(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -215,6 +226,9 @@ export default {
         });
     },
     QualifiedInstructor(){
+        if(this.currentUser==null){
+          alert("You have to login for this feature");
+        }
         console.log("khoboibgoigboug")
         const data = {
         pers:this.currentUser.id.toString(),
@@ -231,6 +245,9 @@ export default {
         });
     },
     report(id){
+      if(this.currentUser==null){
+        alert("You have to login for this feature");
+      }
       console.log("report")
       console.log(this.currentUser)
       const data = {
@@ -249,6 +266,9 @@ export default {
         });
     },
     likeComment (id){
+      if(this.currentUser==null){
+        alert("You have to login for this feature");
+      }
       const like_data = {
         pers:this.currentUser.id.toString(),
         comment:id.toString(),
@@ -265,6 +285,9 @@ export default {
         });
     },
     send(){
+      if(this.currentUser==null){
+        alert("You have to login for this feature");
+      }
       const comment = {
         pers:this.currentUser.id,
         resc:this.$route.params.id,

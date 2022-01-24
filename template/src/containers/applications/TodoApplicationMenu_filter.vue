@@ -110,7 +110,7 @@ const TodoApplicationMenu = {
           return response.data;
         })
         .then(res => {
-          this.subCategories.push({title:"cubcategory",tags:res})
+          this.subCategories.push({title:"subcategory",tags:res})
           console.log(this.filters)
       });
     }

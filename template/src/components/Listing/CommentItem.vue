@@ -3,7 +3,7 @@
 <div class="d-flex flex-row mb-3 pb-3 border-bottom" style="position: relative;">
     
     <router-link tag="a" :to="detailPath">
-        <img src="/assets/img/profiles/l-1.jpg" class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU" class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
         
 
     </router-link>

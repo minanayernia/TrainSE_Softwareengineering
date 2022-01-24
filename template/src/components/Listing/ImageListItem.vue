@@ -72,6 +72,9 @@ export default {
             this.isHovered = hovered
         },
         bookmark(){
+          if(this.currentUser==null){
+            alert("You have to login for this feature");
+          }
           console.log("add bookmark"); 
           const bookmark = {
           person_id:this.currentUser.id,
@@ -87,6 +90,9 @@ export default {
           });
         },
         like(){
+          if(this.currentUser==null){
+            alert("You have to login for this feature");
+          }
           const like = {
           pers:this.currentUser.id.toString(),
           resc: this.data.resource_id.toString(),

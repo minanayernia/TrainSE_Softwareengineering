@@ -44,7 +44,7 @@ export default {
         whoAnswer: null,
         request_text: this.request_text,    
       };
-
+      console.log(data1);
       axios
         .post(api+"createquestion/",data1)
         .then(response => {
