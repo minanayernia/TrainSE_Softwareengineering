@@ -89,7 +89,7 @@ class Notification(models.Model):
     pub_date =      models.DateTimeField(auto_now_add=True ,null=True , blank=True)
     reciever =      models.ForeignKey(Person , on_delete=models.CASCADE , related_name= "reciever")
     sender =        models.ForeignKey(Person , on_delete=models.CASCADE , related_name= "sender")
-    NotifType=      (('CR' , 'commentReply') , ('LC' , 'likeComment'))
+    NotifType=      (('CR' , 'commentReply') , ('LC' , 'likeComment') , ('R' , "Request"))
     notiftype=      models.CharField(max_length=2 , choices=NotifType)
     likecomment=    models.ForeignKey(LikeComment , on_delete=models.CASCADE , null=True , blank=True)
     commentReply=   models.ForeignKey(Commentt , on_delete=models.CASCADE , null=True , blank=True)
