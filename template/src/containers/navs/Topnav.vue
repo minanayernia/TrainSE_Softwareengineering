@@ -59,7 +59,7 @@
       </div>
       
     </div>
-      <add-new-modal v-if="currentUser!=null"> :id="currentUser.id" ></add-new-modal>
+      <add-new-modal v-if="currentUser!=null" :id="currentUser.id" ></add-new-modal>
 
   </nav>
 </template>
