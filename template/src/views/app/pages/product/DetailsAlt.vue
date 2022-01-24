@@ -261,8 +261,14 @@ export default {
           return response.data;
         })
         .then(res => {
+            if(res.status==500) {
+              alert("you report this item before")
+            }
+            else{
+              alert("report done")
+            }
             this.loadResources();
-            console.log(res);
+            
         });
     },
     likeComment (id){
@@ -319,7 +325,12 @@ export default {
           return response.data;
         })
         .then(res => {
-
+            if(res.status==500) {
+              alert("you report this item before")
+            }
+            else{
+              alert("report done")
+            }
         });
     },
     loadResources(){
