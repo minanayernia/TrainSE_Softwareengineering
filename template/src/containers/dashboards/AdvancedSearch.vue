@@ -7,11 +7,11 @@
   >
     <b-card-body>
       <center >
-            <h2 class="card-title text-white">Find the Best sonftware engineering Courses & Tutorials</h2>
+            <h2 class="card-title text-white">Find the best software engineering courses & tutorials</h2>
       </center>
       <b-form class="form-container">
         <b-form-group >
-          <b-form-input type="text" :placeholder="'search for software engineering topic...'"  @input="(val) => searchChange(val)" ></b-form-input>
+          <b-form-input type="text" :placeholder="'search for software engineering categories...'"  @input="(val) => searchChange(val)" ></b-form-input>
         </b-form-group>
       </b-form>
     </b-card-body>
