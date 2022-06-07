@@ -29,17 +29,13 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import SurveyListItem from "../../components/SurveyApp/SurveyListItem";
-import SurveyApplicationMenu from "../../containers/applications/SurveyApplicationMenu";
-import SurveyAddNewModal from "../../containers/applications/SurveyAddNewModal";
 
 import axios from "axios";
 import { apiUrl, api } from "../../constants/config";
 
 export default {
   components: {
-    "survey-list-item": SurveyListItem,
-    "survey-add-new-modal": SurveyAddNewModal,
-    "survey-application-menu": SurveyApplicationMenu
+    "survey-list-item": SurveyListItem
   },
   data() {
     return {

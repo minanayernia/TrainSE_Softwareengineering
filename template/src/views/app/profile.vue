@@ -126,8 +126,6 @@
 
 <script>
 import SingleLightbox from "../../containers/pages/SingleLightbox";
-import RecentPost from "../../components/Common/RecentPost";
-import UserCardBasic from "../../components/Cards/UserCardBasic";
 import ImageListItem from "../../components/Listing/ImageListItem";
 
 import { mapGetters, mapMutations, mapActions } from "vuex";
@@ -139,8 +137,6 @@ import EditNewModal from "../../containers/pages/EditNewModal";
 export default {
   components: {
     "single-lightbox": SingleLightbox,
-    "recent-post": RecentPost,
-    "user-card-basic": UserCardBasic,
     "edit-new-modal": EditNewModal,
     "image-list-item": ImageListItem
   },

@@ -101,28 +101,18 @@
 </template>
 
 <script>
-import Stars from "../../components/Common/Stars";
-import RadialProgressCard from "../../components/Cards/RadialProgressCard";
 import CommentItem from "../../components/Listing/CommentItem";
-import OrderItem from "../../components/Listing/OrderItem";
 import { apiUrl ,api } from "../../constants/config";
 import axios from "axios";
 import EditResource from "../../containers/pages/EditResource";
 import { mapGetters, mapMutations, mapActions } from "vuex";
-
-import GradientWithRadialProgressCard from "../../components/Cards/GradientWithRadialProgressCard";
-import IconCard from "../../components/Cards/IconCard";
 import IconCardsCarousel from "../../containers/dashboards/IconCardsCarousel";
 
 export default {
   components: {
     stars: Stars,
-    "radial-progress-card": RadialProgressCard,
     "comment-item": CommentItem,
-    "order-item": OrderItem,
     "edit-resource": EditResource,
-    "gradient-with-radial-progress-card": GradientWithRadialProgressCard,
-    "icon-card": IconCard,
     "icon-cards-carousel": IconCardsCarousel,
 
   },

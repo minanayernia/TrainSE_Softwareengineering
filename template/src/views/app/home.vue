@@ -83,7 +83,6 @@
 import AdvancedSearch from "../../containers/dashboards/AdvancedSearch";
 import axios from "axios";
 import { api } from "../../constants/config";
-import data from "../../constants/menu";
 import AddNewModal from "./AddNewModal";
 import Edit from "./Edit";
 import { mapGetters, mapMutations, mapActions } from "vuex";

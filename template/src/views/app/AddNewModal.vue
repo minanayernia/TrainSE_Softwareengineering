@@ -26,29 +26,11 @@
 </template>
 
 <script>
-import vSelect from "vue-select";
-import "vue-select/dist/vue-select.css";
-import Tab from "../../components/Form/Wizard/Tab";
-
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
-
-import VueDropzone from "vue2-dropzone";
 import { mapGetters, mapMutations, mapActions } from "vuex";
-
-import { quillEditor } from "vue-quill-editor";
 import { apiUrl, api } from "../../constants/config";
 import axios from "axios";
-import FormWizard from "../../components/Form/Wizard/FormWizard";
 
 export default {
-  components: {
-    "v-select": vSelect,
-    Tab,
-    FormWizard,
-    "vue-dropzone": VueDropzone
-  },
   props: ["categoryID"],
   data() {
     return {
