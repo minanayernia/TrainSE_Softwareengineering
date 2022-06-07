@@ -106,7 +106,7 @@ import { apiUrl ,api } from "../../constants/config";
 import axios from "axios";
 import EditResource from "../../containers/pages/EditResource";
 import { mapGetters, mapMutations, mapActions } from "vuex";
-import IconCardsCarousel from "../../containers/dashboards/IconCardsCarousel";
+import IconCardsCarousel from "../../containers/IconCardsCarousel";
 
 export default {
   components: {

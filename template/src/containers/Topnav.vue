@@ -83,20 +83,20 @@ import Switches from "vue-switches";
 import AddNewModal from "./AddNewModal";
 
 import { mapGetters, mapMutations, mapActions } from "vuex";
-import { MenuIcon, MobileMenuIcon } from "../../components/Svg";
+import { MenuIcon, MobileMenuIcon } from "../components/Svg";
 import {
   searchPath,
   menuHiddenBreakpoint,
   localeOptions,
   buyUrl,
   adminRoot
-} from "../../constants/config";
+} from "../constants/config";
 import {
   getDirection,
   setDirection,
   getThemeColor,
   setThemeColor
-} from "../../utils";
+} from "../utils";
 export default {
   components: {
     "menu-icon": MenuIcon,

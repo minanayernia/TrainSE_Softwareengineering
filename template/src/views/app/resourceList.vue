@@ -60,7 +60,7 @@ import axios from "axios";
 import { apiUrl, api } from "../../constants/config";
 import ListPageHeading from "../../containers/pages/ListPageHeading";
 import ListPageListing from "../../containers/pages/ListPageListing";
-import TodoApplicationMenu from "../../containers/applications/TodoApplicationMenu_filter";
+import TodoApplicationMenu from "../../containers/TodoApplicationMenu_filter";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {

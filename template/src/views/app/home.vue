@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import AdvancedSearch from "../../containers/dashboards/AdvancedSearch";
+import AdvancedSearch from "../../containers/AdvancedSearch";
 import axios from "axios";
 import { api } from "../../constants/config";
 import AddNewModal from "./AddNewModal";

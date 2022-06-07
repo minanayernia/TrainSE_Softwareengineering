@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" @click.stop="()=>{}">
+  <div class="sidebar" @click.stop="() => {}">
     <div class="main-menu">
       <vue-perfect-scrollbar
         class="scroll"
@@ -7,18 +7,27 @@
       >
         <ul class="list-unstyled">
           <li
-            v-for="(item,index) in filteredMenuItems(menuItems)"
-            :class="{ 'active' : (selectedParentMenu === item.id && viewingParentMenu === '') || viewingParentMenu === item.id }"
+            v-for="(item, index) in filteredMenuItems(menuItems)"
+            :class="{
+              active:
+                (selectedParentMenu === item.id && viewingParentMenu === '') ||
+                viewingParentMenu === item.id
+            }"
             :key="`parent_${index}`"
             :data-flag="item.id"
           >
-            <a v-if="item.newWindow" :href="item.to" rel="noopener noreferrer" target="_blank">
+            <a
+              v-if="item.newWindow"
+              :href="item.to"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <i :class="item.icon" />
               {{ $t(item.label) }}
             </a>
             <a
-              v-else-if="item.subs && item.subs.length>0"
-              @click.prevent="openSubMenu($event,item)"
+              v-else-if="item.subs && item.subs.length > 0"
+              @click.prevent="openSubMenu($event, item)"
               :href="`#${item.to}`"
             >
               <i :class="item.icon" />
@@ -43,35 +52,53 @@
         :settings="{ suppressScrollX: true, wheelPropagation: false }"
       >
         <ul
-          v-for="(item,itemIndex) in filteredMenuItems(menuItems)"
-          :class="{'list-unstyled':true, 'd-block' : (selectedParentMenu === item.id && viewingParentMenu === '') || viewingParentMenu === item.id }"
+          v-for="(item, itemIndex) in filteredMenuItems(menuItems)"
+          :class="{
+            'list-unstyled': true,
+            'd-block':
+              (selectedParentMenu === item.id && viewingParentMenu === '') ||
+              viewingParentMenu === item.id
+          }"
           :data-parent="item.id"
           :key="`sub_${item.id}`"
         >
           <li
-            v-for="(sub,subIndex) in filteredMenuItems(item.subs)"
+            v-for="(sub, subIndex) in filteredMenuItems(item.subs)"
             :key="`sub_${subIndex}`"
-            :class="{'has-sub-item' : sub.subs && sub.subs.length > 0 , 'active' : $route.path.indexOf(sub.to)>-1}"
+            :class="{
+              'has-sub-item': sub.subs && sub.subs.length > 0,
+              active: $route.path.indexOf(sub.to) > -1
+            }"
           >
-            <a v-if="sub.newWindow" :href="sub.to" rel="noopener noreferrer" target="_blank">
+            <a
+              v-if="sub.newWindow"
+              :href="sub.to"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <i :class="sub.icon" />
               <span>{{ $t(sub.label) }}</span>
             </a>
-            <template v-else-if="sub.subs &&  sub.subs.length > 0">
+            <template v-else-if="sub.subs && sub.subs.length > 0">
               <b-link
                 v-b-toggle="`menu_${itemIndex}_${subIndex}`"
                 variant="link"
                 class="rotate-arrow-icon opacity-50"
               >
                 <i class="simple-icon-arrow-down"></i>
-                <span class="d-inline-block">{{$t(sub.label)}}</span>
+                <span class="d-inline-block">{{ $t(sub.label) }}</span>
               </b-link>
               <b-collapse visible :id="`menu_${itemIndex}_${subIndex}`">
                 <ul class="list-unstyled third-level-menu">
                   <li
-                    v-for="(thirdLevelSub, thirdIndex) in filteredMenuItems(sub.subs)"
+                    v-for="(thirdLevelSub, thirdIndex) in filteredMenuItems(
+                      sub.subs
+                    )"
                     :key="`third_${itemIndex}_${subIndex}_${thirdIndex}`"
-                    :class="{'third-level-menu':true , 'active' : $route.path ===thirdLevelSub.to}"
+                    :class="{
+                      'third-level-menu': true,
+                      active: $route.path === thirdLevelSub.to
+                    }"
                   >
                     <a
                       v-if="thirdLevelSub.newWindow"
@@ -103,19 +130,16 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import {
-  menuHiddenBreakpoint,
-  subHiddenBreakpoint,
-} from "../../constants/config";
-import menuItems from "../../constants/menu";
-import { UserRole } from "../../utils/auth.roles";
+import { menuHiddenBreakpoint, subHiddenBreakpoint } from "../constants/config";
+import menuItems from "../constants/menu";
+import { UserRole } from "../utils/auth.roles";
 
 export default {
   data() {
     return {
       selectedParentMenu: "",
       menuItems,
-      viewingParentMenu: "",
+      viewingParentMenu: ""
     };
   },
   mounted() {
@@ -133,12 +157,12 @@ export default {
     ...mapMutations([
       "changeSideMenuStatus",
       "addMenuClassname",
-      "changeSelectedMenuHasSubItems",
+      "changeSelectedMenuHasSubItems"
     ]),
     selectMenu() {
       const currentParentUrl = this.$route.path
         .split("/")
-        .filter((x) => x !== "")[1];
+        .filter(x => x !== "")[1];
       if (currentParentUrl !== undefined || currentParentUrl !== null) {
         this.selectedParentMenu = currentParentUrl.toLowerCase();
       } else {
@@ -148,7 +172,7 @@ export default {
     },
     isCurrentMenuHasSubItem() {
       const menuItem = this.menuItems.find(
-        (x) => x.id === this.selectedParentMenu
+        x => x.id === this.selectedParentMenu
       );
       const isCurrentMenuHasSubItem =
         menuItem && menuItem.subs && menuItem.subs.length > 0 ? true : false;
@@ -157,13 +181,13 @@ export default {
           this.changeSideMenuStatus({
             step: 0,
             classNames: this.menuType,
-            selectedMenuHasSubItems: false,
+            selectedMenuHasSubItems: false
           });
         } else {
           this.changeSideMenuStatus({
             step: 0,
             classNames: this.menuType,
-            selectedMenuHasSubItems: true,
+            selectedMenuHasSubItems: true
           });
         }
       }
@@ -178,7 +202,7 @@ export default {
       this.changeSideMenuStatus({
         step: 0,
         classNames: this.menuType,
-        selectedMenuHasSubItems: false,
+        selectedMenuHasSubItems: false
       });
     },
 
@@ -192,7 +216,7 @@ export default {
         this.toggle();
       } else {
         const currentClasses = this.menuType
-          ? this.menuType.split(" ").filter((x) => x !== "")
+          ? this.menuType.split(" ").filter(x => x !== "")
           : "";
 
         if (!currentClasses.includes("menu-mobile")) {
@@ -203,7 +227,7 @@ export default {
             this.changeSideMenuStatus({
               step: 3,
               classNames: this.menuType,
-              selectedMenuHasSubItems: hasSubMenu,
+              selectedMenuHasSubItems: hasSubMenu
             });
           } else if (
             currentClasses.includes("menu-hidden") &&
@@ -212,7 +236,7 @@ export default {
             this.changeSideMenuStatus({
               step: 2,
               classNames: this.menuType,
-              selectedMenuHasSubItems: hasSubMenu,
+              selectedMenuHasSubItems: hasSubMenu
             });
           } else if (
             currentClasses.includes("menu-default") &&
@@ -222,13 +246,13 @@ export default {
             this.changeSideMenuStatus({
               step: 0,
               classNames: this.menuType,
-              selectedMenuHasSubItems: hasSubMenu,
+              selectedMenuHasSubItems: hasSubMenu
             });
           }
         } else {
           this.addMenuClassname({
             classname: "sub-show-temporary",
-            currentClasses: this.menuType,
+            currentClasses: this.menuType
           });
         }
         this.viewingParentMenu = selectedParent;
@@ -240,7 +264,7 @@ export default {
       this.toggle();
     },
     toggle() {
-      const currentClasses = this.menuType.split(" ").filter((x) => x !== "");
+      const currentClasses = this.menuType.split(" ").filter(x => x !== "");
       if (
         currentClasses.includes("menu-sub-hidden") &&
         this.menuClickCount === 3
@@ -248,7 +272,7 @@ export default {
         this.changeSideMenuStatus({
           step: 2,
           classNames: this.menuType,
-          selectedMenuHasSubItems: this.selectedMenuHasSubItems,
+          selectedMenuHasSubItems: this.selectedMenuHasSubItems
         });
       } else if (
         currentClasses.includes("menu-hidden") ||
@@ -258,7 +282,7 @@ export default {
           this.changeSideMenuStatus({
             step: 0,
             classNames: this.menuType,
-            selectedMenuHasSubItems: this.selectedMenuHasSubItems,
+            selectedMenuHasSubItems: this.selectedMenuHasSubItems
           });
         }
       }
@@ -273,17 +297,17 @@ export default {
       this.changeSideMenuStatus({
         step: 0,
         classNames: nextClasses.join(" "),
-        selectedMenuHasSubItems: this.selectedMenuHasSubItems,
+        selectedMenuHasSubItems: this.selectedMenuHasSubItems
       });
     },
     getMenuClassesForResize(classes) {
-      let nextClasses = classes.split(" ").filter((x) => x !== "");
+      let nextClasses = classes.split(" ").filter(x => x !== "");
       const windowWidth = window.innerWidth;
 
       if (windowWidth < menuHiddenBreakpoint) {
         nextClasses.push("menu-mobile");
       } else if (windowWidth < subHiddenBreakpoint) {
-        nextClasses = nextClasses.filter((x) => x !== "menu-mobile");
+        nextClasses = nextClasses.filter(x => x !== "menu-mobile");
         if (
           nextClasses.includes("menu-default") &&
           !nextClasses.includes("menu-sub-hidden")
@@ -291,12 +315,12 @@ export default {
           nextClasses.push("menu-sub-hidden");
         }
       } else {
-        nextClasses = nextClasses.filter((x) => x !== "menu-mobile");
+        nextClasses = nextClasses.filter(x => x !== "menu-mobile");
         if (
           nextClasses.includes("menu-default") &&
           nextClasses.includes("menu-sub-hidden")
         ) {
-          nextClasses = nextClasses.filter((x) => x !== "menu-sub-hidden");
+          nextClasses = nextClasses.filter(x => x !== "menu-sub-hidden");
         }
       }
       return nextClasses;
@@ -306,11 +330,11 @@ export default {
     filteredMenuItems(menuItems) {
       return menuItems
         ? menuItems.filter(
-            (x) =>
+            x =>
               !x.roles || (x.roles && x.roles.includes(this.currentUser.role))
           )
         : [];
-    },
+    }
   },
 
   computed: {
@@ -318,13 +342,13 @@ export default {
       currentUser: "currentUser",
       menuType: "getMenuType",
       menuClickCount: "getMenuClickCount",
-      selectedMenuHasSubItems: "getSelectedMenuHasSubItems",
-    }),
+      selectedMenuHasSubItems: "getSelectedMenuHasSubItems"
+    })
   },
   watch: {
     $route(to, from) {
       if (to.path !== from.path) {
-        const toParentUrl = to.path.split("/").filter((x) => x !== "")[1];
+        const toParentUrl = to.path.split("/").filter(x => x !== "")[1];
         if (toParentUrl !== undefined || toParentUrl !== null) {
           this.selectedParentMenu = toParentUrl.toLowerCase();
         } else {
@@ -335,12 +359,12 @@ export default {
         this.changeSideMenuStatus({
           step: 0,
           classNames: this.menuType,
-          selectedMenuHasSubItems: this.selectedMenuHasSubItems,
+          selectedMenuHasSubItems: this.selectedMenuHasSubItems
         });
 
         window.scrollTo(0, top);
       }
-    },
-  },
+    }
+  }
 };
 </script>
