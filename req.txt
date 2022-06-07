@@ -15,7 +15,6 @@ kavenegar==1.1.2
 orderedmultidict==1.0.1
 phonenumbers==8.10.13
 Pillow==8.4.0
-pkg_resources==0.0.0
 pytz==2019.1
 requests==2.22.0
 six==1.12.0

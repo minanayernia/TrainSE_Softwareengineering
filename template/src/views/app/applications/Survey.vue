@@ -3,24 +3,27 @@
     <b-row class="app-row survey-app">
       <b-colxx lg="2"></b-colxx>
       <b-colxx lg="10">
-      <div class="mb-2 text-center">
-        <h1>Notifications</h1>
-      </div>
-      <div class="separator mb-5" />
-      <b-row key="itemList">
-        <b-colxx xxs="12" v-for="(item,index) in Items" :key="`item${index}`">
-          <survey-list-item
-            :key="item.id"
-            :data="item"
-            :selected-items="selectedItems"
-            @toggle-item="toggleItem"
-          />
-        </b-colxx>
-      </b-row>
+        <div class="mb-2 text-center">
+          <h1>Notifications</h1>
+        </div>
+        <div class="separator mb-5" />
+        <b-row key="itemList">
+          <b-colxx
+            xxs="12"
+            v-for="(item, index) in Items"
+            :key="`item${index}`"
+          >
+            <survey-list-item
+              :key="item.id"
+              :data="item"
+              :selected-items="selectedItems"
+              @toggle-item="toggleItem"
+            />
+          </b-colxx>
+        </b-row>
       </b-colxx>
     </b-row>
   </div>
-
 </template>
 
 <script>
@@ -30,7 +33,7 @@ import SurveyApplicationMenu from "../../../containers/applications/SurveyApplic
 import SurveyAddNewModal from "../../../containers/applications/SurveyAddNewModal";
 
 import axios from "axios";
-import { apiUrl ,api } from "../../../constants/config";
+import { apiUrl, api } from "../../../constants/config";
 
 export default {
   components: {
@@ -40,7 +43,7 @@ export default {
   },
   data() {
     return {
-      Items:[],
+      Items: [],
       sort: {
         column: "title",
         label: "Title"
@@ -110,10 +113,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentUser: "currentUser",
-
+      currentUser: "currentUser"
     })
-      },
+  },
   methods: {
     ...mapActions(["getSurveyItems"]),
     isSelectedAll() {
@@ -126,35 +128,33 @@ export default {
       );
     },
     loadItems() {
-      const data={
-        id:this.currentUser.id,
+      const data = {
+        id: this.currentUser.id
       };
-      const data2={
-        personId:this.currentUser.id,
-      }
-      if(this.currentUser.role=="A"){
+      const data2 = {
+        personId: this.currentUser.id
+      };
+      if (this.currentUser.role == "A") {
         axios
-          .post(api+"SendRequestNotification/",data2)
+          .post(api + "SendRequestNotification/", data2)
           .then(response => {
             console.log(response);
             return response.data;
           })
           .then(res => {
-            this.Items=res;
+            this.Items = res;
           });
-      }
-      else{
+      } else {
         axios
-          .post(api+"showNotification/",data)
+          .post(api + "showNotification/", data)
           .then(response => {
             console.log(response);
             return response.data;
           })
           .then(res => {
-            this.Items=res;
+            this.Items = res;
           });
       }
-
     },
 
     changeOrderBy(sort) {

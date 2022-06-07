@@ -105,9 +105,6 @@ import Stars from "../../../../components/Common/Stars";
 import RadialProgressCard from "../../../../components/Cards/RadialProgressCard";
 import CommentItem from "../../../../components/Listing/CommentItem";
 import OrderItem from "../../../../components/Listing/OrderItem";
-import { comments } from "../../../../data/comments";
-import orders from "../../../../data/orders";
-import SmallLineCharts from "../../../../containers/dashboards/SmallLineCharts";
 import { apiUrl ,api } from "../../../../constants/config";
 import axios from "axios";
 import EditResource from "../../../../containers/pages/EditResource";
@@ -123,7 +120,6 @@ export default {
     "radial-progress-card": RadialProgressCard,
     "comment-item": CommentItem,
     "order-item": OrderItem,
-    "small-line-charts": SmallLineCharts,
     "edit-resource": EditResource,
     "gradient-with-radial-progress-card": GradientWithRadialProgressCard,
     "icon-card": IconCard,
@@ -136,8 +132,6 @@ export default {
       comment_txt:"",
       isLoad: false,
       repleyID:null,
-      comments: comments.slice(0, 5),
-      orders
     };
   },
   computed: {
