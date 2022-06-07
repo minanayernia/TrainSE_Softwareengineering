@@ -107,6 +107,7 @@ import axios from "axios";
 import EditResource from "../../containers/pages/EditResource";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import IconCardsCarousel from "../../containers/IconCardsCarousel";
+import Stars from '../../components/Common/Stars'
 
 export default {
   components: {
