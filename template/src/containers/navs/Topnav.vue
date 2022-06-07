@@ -159,11 +159,11 @@ export default {
     },
 
     goToNotif() {
-      this.$router.push("/app/applications/survey");
+      this.$router.push("/app/notification");
     },
 
     goToProfile() {
-      this.$router.push("/app/pages/profile/portfolio");
+      this.$router.push("/app/profile");
     },
     toggleFullScreen() {
       const isInFullScreen = this.isInFullScreen();
