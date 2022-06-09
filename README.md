@@ -3,7 +3,7 @@
 ## 1. Install the project dependencies:
 
 ```
-pip install -r req.txt
+pip install -r requirements.txt
 
 ```
 
