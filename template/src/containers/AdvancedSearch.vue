@@ -1,5 +1,5 @@
 <template>
-  <b-card overlay style="height: 200px;background-color:#006da3;" class="img-fluid mb-2" alt="Responsive image"
+  <b-card overlay style="height: 200px;background-color:#008ecc;" class="img-fluid mb-2" alt="Responsive image"
     text-variant="white">
     <b-card-body>
       <center>

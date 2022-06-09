@@ -10,7 +10,7 @@
     </div>
 
     <router-link class="navbar-logo" tag="a" :to="adminRoot">
-      <h1 style="color: #304d72;font-weight:bold;">TrainSE</h1>
+      <h1 style="color: #006da3;font-weight:bold;">TrainSE</h1>
     </router-link>
 
     <div class="navbar-right">
