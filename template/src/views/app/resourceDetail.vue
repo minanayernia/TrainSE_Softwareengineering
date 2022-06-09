@@ -92,8 +92,6 @@
                 </b-card>
               </b-colxx>
             </b-row>
-          </b-tab>
-
         </b-tabs>
       </b-colxx>
     </b-row>
