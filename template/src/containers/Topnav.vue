@@ -2,79 +2,43 @@
   <nav class="navbar fixed-top">
     <div class="d-flex align-items-center ml-5 navbar-left">
       <div class="d-none d-md-inline-block align-middle mr-3">
-        <switches
-          id="tool-mode-switch"
-          v-model="isDarkActive"
-          theme="custom"
-          class="vue-switcher-small"
-          color="primary"
-        />
-        <b-tooltip
-          v-if="isDarkActive"
-          target="tool-mode-switch"
-          placement="left"
-          title="Light Mode"
-        ></b-tooltip>
-        <b-tooltip
-          v-else
-          target="tool-mode-switch"
-          placement="left"
-          title="Dark Mode"
-        ></b-tooltip>
+        <switches id="tool-mode-switch" v-model="isDarkActive" theme="custom" class="vue-switcher-small"
+          color="primary" />
+        <b-tooltip v-if="isDarkActive" target="tool-mode-switch" placement="left" title="Light Mode"></b-tooltip>
+        <b-tooltip v-else target="tool-mode-switch" placement="left" title="Dark Mode"></b-tooltip>
       </div>
     </div>
 
     <router-link class="navbar-logo" tag="a" :to="adminRoot">
-      <span class="logo d-none d-xs-block"></span>
-      <span class="logo-mobile d-block d-xs-none"></span>
+      <h1 style="color: #304d72;font-weight:bold;">TrainSE</h1>
     </router-link>
 
     <div class="navbar-right">
       <div v-if="currentUser !== null" class="user d-inline-block">
-        <b-dropdown
-          class="dropdown-menu-right"
-          right
-          variant="empty"
-          toggle-class="p-0"
-          menu-class="mt-3"
-          no-caret
-        >
+        <b-dropdown class="dropdown-menu-right" right variant="empty" toggle-class="p-0" menu-class="mt-3" no-caret>
           <template slot="button-content">
             <span class="name">{{ currentUser.username }}</span>
             <span>
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU"
-              />
+              <img src="https://iconarchive.com/download/i48697/custom-icon-design/pretty-office-2/man.ico"
+                width="200" />
             </span>
           </template>
           <b-dropdown-item @click="goToProfile">My Profile</b-dropdown-item>
           <b-dropdown-item @click="goToNotif">Notifications</b-dropdown-item>
-          <b-dropdown-item v-if="currentUser.role == 'U'" v-b-modal.request
-            >Request a Feature</b-dropdown-item
-          >
+          <b-dropdown-item v-if="currentUser.role == 'U'" v-b-modal.request>Request a Feature</b-dropdown-item>
 
           <b-dropdown-divider />
           <b-dropdown-item @click="logout">Sign out</b-dropdown-item>
         </b-dropdown>
       </div>
 
-      <div
-        v-else
-        class="position-relative d-none d-lg-inline-block user d-inline-block"
-      >
+      <div v-else class="position-relative d-none d-lg-inline-block user d-inline-block">
         <router-link to="/user/login">
-          <a
-            class="btn btn-outline-primary btn-sm ml-2 text-primary"
-            target="_top"
-            >{{ $t("menu.login") }}</a
-          >
+          <a class="btn btn-outline-primary btn-sm ml-2 text-primary" target="_top">{{ $t("menu.login") }}</a>
         </router-link>
       </div>
     </div>
-    <add-new-modal
-      v-if="currentUser != null"
-      :id="currentUser.id"
-    ></add-new-modal>
+    <add-new-modal v-if="currentUser != null" :id="currentUser.id"></add-new-modal>
   </nav>
 </template>
 

@@ -12,17 +12,11 @@
               </div>
 
               <single-lightbox
-                thumb="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU"
-                large="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&usqp=CAU"
-                class-name="card-img-top"
-              />
-              <b-button
-                :href="data.link"
-                v-b-modal.modalright
-                variant="primary"
-                style="border-radius: 0px 0px 10px 10px;"
-                >Edit Profile</b-button
-              >
+                thumb="https://iconarchive.com/download/i48697/custom-icon-design/pretty-office-2/man.ico"
+                large="https://iconarchive.com/download/i48697/custom-icon-design/pretty-office-2/man.ico"
+                class-name="card-img-top" />
+              <b-button :href="data.link" v-b-modal.modalright variant="primary"
+                style="border-radius: 0px 0px 10px 10px;">Edit Profile</b-button>
 
               <b-card-body>
                 <p class="text-muted text-small mb-2">{{ $t("User Name") }}</p>
@@ -42,11 +36,7 @@
                 <p class="mb-3">{{ data.email }}</p>
 
                 <b-row>
-                  <edit-new-modal
-                    :loadProfile="loadProfile"
-                    :id="currentUser.id"
-                    :data="data"
-                  ></edit-new-modal>
+                  <edit-new-modal :loadProfile="loadProfile" :id="currentUser.id" :data="data"></edit-new-modal>
                 </b-row>
               </b-card-body>
             </b-card>
@@ -54,66 +44,32 @@
         </b-colxx>
 
         <b-colxx xxs="12" lg="8" class="mb-4 col-right">
-          <b-tabs
-            nav-class="separator-tabs ml-0 mb-5"
-            content-class="tab-content"
-            :no-fade="true"
-          >
+          <b-tabs nav-class="separator-tabs ml-0 mb-5" content-class="tab-content" :no-fade="true">
             <b-tab :title="$t('BOOKMARK')">
               <b-row>
-                <b-colxx
-                  v-for="(item, itemIndex) in bookmarkedList"
-                  xxs="12"
-                  lg="6"
-                  xl="4"
-                  class="mb-4"
-                  :key="`product_${itemIndex}`"
-                >
-                  <image-list-item
-                    :key="item.resource_id"
-                    :data="item"
-                    :selected-items="selectedItems"
-                    :loadItems="loadProfile"
-                  />
+                <b-colxx v-for="(item, itemIndex) in bookmarkedList" xxs="12" lg="6" xl="4" class="mb-4"
+                  :key="`product_${itemIndex}`">
+                  <image-list-item :key="item.resource_id" :data="item" :selected-items="selectedItems"
+                    :loadItems="loadProfile" />
                 </b-colxx>
               </b-row>
             </b-tab>
 
             <b-tab :title="$t('SUBMITED')">
               <b-row>
-                <b-colxx
-                  v-for="(item, itemIndex) in submittedList"
-                  xxs="12"
-                  lg="6"
-                  xl="4"
-                  class="mb-4"
-                  :key="`product_${itemIndex}`"
-                >
-                  <image-list-item
-                    :key="item.resource_id"
-                    :data="item"
-                    :selected-items="selectedItems"
-                    :loadItems="loadProfile"
-                  />
+                <b-colxx v-for="(item, itemIndex) in submittedList" xxs="12" lg="6" xl="4" class="mb-4"
+                  :key="`product_${itemIndex}`">
+                  <image-list-item :key="item.resource_id" :data="item" :selected-items="selectedItems"
+                    :loadItems="loadProfile" />
                 </b-colxx>
               </b-row>
             </b-tab>
             <b-tab :title="$t('LIKED')">
               <b-row>
-                <b-colxx
-                  v-for="(item, itemIndex) in likedList"
-                  xxs="12"
-                  lg="6"
-                  xl="4"
-                  class="mb-4"
-                  :key="`product_${itemIndex}`"
-                >
-                  <image-list-item
-                    :key="item.resource_id"
-                    :data="item"
-                    :selected-items="selectedItems"
-                    :loadItems="loadProfile"
-                  />
+                <b-colxx v-for="(item, itemIndex) in likedList" xxs="12" lg="6" xl="4" class="mb-4"
+                  :key="`product_${itemIndex}`">
+                  <image-list-item :key="item.resource_id" :data="item" :selected-items="selectedItems"
+                    :loadItems="loadProfile" />
                 </b-colxx>
               </b-row>
             </b-tab>

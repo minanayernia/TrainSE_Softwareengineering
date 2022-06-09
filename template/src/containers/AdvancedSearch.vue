@@ -1,17 +1,14 @@
 <template>
-  <b-card
-    overlay
-    img-src="https://knowledgeone.ca/wp-content/uploads/2020/04/transition-online.jpg" class="img-fluid mb-2" alt="Responsive image"
-    text-variant="white"
-    
-  >
+  <b-card overlay style="height: 200px;background-color:#006da3;" class="img-fluid mb-2" alt="Responsive image"
+    text-variant="white">
     <b-card-body>
-      <center >
-            <h2 class="card-title text-white">Find the best software engineering courses & tutorials</h2>
+      <center>
+        <h2 class="card-title text-white">Find the best software engineering courses & tutorials</h2>
       </center>
       <b-form class="form-container">
-        <b-form-group >
-          <b-form-input type="text" :placeholder="'search for software engineering categories...'"  @input="(val) => searchChange(val)" ></b-form-input>
+        <b-form-group>
+          <b-form-input type="text" :placeholder="'search for software engineering categories...'"
+            @input="(val) => searchChange(val)"></b-form-input>
         </b-form-group>
       </b-form>
     </b-card-body>
